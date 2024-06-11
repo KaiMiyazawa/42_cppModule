@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miyazawa.kai.0823 <miyazawa.kai.0823@st    +#+  +:+       +#+        */
+/*   By: kmiyazaw <kmiyazaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:47:58 by miyazawa.ka       #+#    #+#             */
-/*   Updated: 2024/06/10 19:39:50 by miyazawa.ka      ###   ########.fr       */
+/*   Updated: 2024/06/11 14:37:44 by kmiyazaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int main(void)
 {
 	PhoneBook book;
 	std::string input = "";
-	book.welcome();
+	book.welcomeMsg();
 	while (input.compare("EXIT"))
 	{
 		if (input.compare("ADD") == 0)
@@ -30,10 +30,9 @@ int main(void)
 			book.search();
 		}
 		else
-			book.describe();
+			book.explainMsg();
 		std::cout << "> " << std::flush;
 		std::cin >> input;
 	}
 	return 0;
 }
-

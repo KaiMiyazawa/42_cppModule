@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miyazawa.kai.0823 <miyazawa.kai.0823@st    +#+  +:+       +#+        */
+/*   By: kmiyazaw <kmiyazaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 18:22:02 by miyazawa.ka       #+#    #+#             */
-/*   Updated: 2024/06/10 19:13:49 by miyazawa.ka      ###   ########.fr       */
+/*   Updated: 2024/06/11 14:32:26 by kmiyazaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ class Contact
 		std::string	_darkestSecret;
 		int			_index;
 
-		std::string	_printLen(std::string str) const;
+		std::string	_printTenChar(std::string str) const;
 		std::string	_getInput(std::string str) const;
 
 	public:
 		Contact();
 		~Contact();
 		void	init(void);
-		void	view(int index) const;
-		void	display(int index) const;
+		void	displayFew(int index) const;
+		void	displayAll(int index) const;
 		void	setIndex(int i);
 };
 

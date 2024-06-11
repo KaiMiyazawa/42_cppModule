@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miyazawa.kai.0823 <miyazawa.kai.0823@st    +#+  +:+       +#+        */
+/*   By: kmiyazaw <kmiyazaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:48:32 by miyazawa.ka       #+#    #+#             */
-/*   Updated: 2024/06/10 19:46:45 by miyazawa.ka      ###   ########.fr       */
+/*   Updated: 2024/06/11 14:34:07 by kmiyazaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void Contact::init(void)
 	std::cout << std::endl;
 }
 
-std::string Contact::_printLen(std::string str) const
+std::string Contact::_printTenChar(std::string str) const
 {
 	if (str.length() > 10)
 		return (str.substr(0, 9) + ".");
@@ -65,20 +65,21 @@ void Contact::setIndex(int i)
 	this->_index = i;
 }
 
-void	Contact::view(int index) const
+void	Contact::displayFew(int index) const
 {
 	if (this->_firstName.empty() || this->_lastName.empty() || this->_nickname.empty())
 		return ;
 	std::cout << "|" << std::setw(10) << index << std::flush;
-	std::cout << "|" << std::setw(10) << this->_printLen(this->_firstName) << std::flush;
-	std::cout << "|" << std::setw(10) << this->_printLen(this->_lastName) << std::flush;
-	std::cout << "|" << std::setw(10) << this->_printLen(this->_nickname) << std::flush;
+	std::cout << "|" << std::setw(10) << this->_printTenChar(this->_firstName) << std::flush;
+	std::cout << "|" << std::setw(10) << this->_printTenChar(this->_lastName) << std::flush;
+	std::cout << "|" << std::setw(10) << this->_printTenChar(this->_nickname) << std::flush;
 	std::cout << "|" << std::endl;
 }
 
-void	Contact::display(int index) const
+void	Contact::displayAll(int index) const
 {
-	if (this->_firstName.empty() || this->_lastName.empty() || this->_nickname.empty())
+	if (this->_firstName.empty() || this->_lastName.empty() || this->_nickname.empty()
+		|| this->_phoneNumber.empty() || this->_darkestSecret.empty())
 	{
 		std::cout << std::endl;
 		std::cout << "No contact #" << index << " information available." << std::endl;
@@ -86,7 +87,8 @@ void	Contact::display(int index) const
 		return ;
 	}
 	std::cout << std::endl;
-	std::cout << "Contact #" << index << std::endl;
+	std::cout << "================ Cntact #" << index << " =================" << std::endl;
+	std::cout << "Contact:\t#" << index << std::endl;
 	std::cout << "First name:\t" << this->_firstName << std::endl;
 	std::cout << "Last name:\t" << this->_lastName << std::endl;
 	std::cout << "Nickname:\t" << this->_nickname << std::endl;

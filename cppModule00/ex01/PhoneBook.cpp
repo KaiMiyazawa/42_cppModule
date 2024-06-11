@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miyazawa.kai.0823 <miyazawa.kai.0823@st    +#+  +:+       +#+        */
+/*   By: kmiyazaw <kmiyazaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:48:37 by miyazawa.ka       #+#    #+#             */
-/*   Updated: 2024/06/10 19:40:06 by miyazawa.ka      ###   ########.fr       */
+/*   Updated: 2024/06/11 14:34:07 by kmiyazaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ PhoneBook::~PhoneBook()
 {
 }
 
-void PhoneBook::welcome(void) const
+void PhoneBook::welcomeMsg(void) const
 {
 	std::cout << std::endl;
 	std::cout << "Welcome to the phone book!" << std::endl;
 }
 
-void PhoneBook::describe(void) const
+void PhoneBook::explainMsg(void) const
 {
 	std::cout << std::endl;
-	std::cout << "Commands:" << std::endl;
+	std::cout << "========== Commands: ==========" << std::endl;
 	std::cout << "ADD\t: Add a new contact" << std::endl;
 	std::cout << "SEARCH\t: Search for a contact" << std::endl;
 	std::cout << "EXIT\t: Exit the phone book" << std::endl;
@@ -46,24 +46,25 @@ void PhoneBook::addContact(void)
 
 void	PhoneBook::printContacts(void) const
 {
-	std::cout << "CONTACTS" << std::endl;
+	std::cout << std::endl;
+	std::cout << "================= CONTACTS =================" << std::endl;
 	for (size_t i = 0; i < 8; i++)
 	{
-		this->_contacts[i].view(i);
+		this->_contacts[i].displayFew(i);
 	}
 	std::cout << std::endl;
 }
 
-
-int		PhoneBook::_readInput() const
+void	PhoneBook::search(void) const
 {
-	int		input = -1;
+	//何番の電話番号を表示するのかの入力うけ
+	int input = -1;
 	bool	valid = false;
 	while (!valid)
 	{
 		std::cout << "Enter the contact index: " << std::flush;
 		std::cin >> input;
-		if (std::cin.good() && (input >= 0 && input <= 8))
+		if (std::cin.good() && (input >= 0 && input <= 7))
 		{
 			valid = true;
 		}
@@ -76,12 +77,6 @@ int		PhoneBook::_readInput() const
 			std::cout << "Invalid input. Please try again." << std::endl;
 		}
 	}
-	return (input);
-}
-
-void	PhoneBook::search(void) const
-{
-	int i;
-	i = this->_readInput();
-	this->_contacts[i].display(i);
+	//番号に対応する電話帳の情報をput
+	this->_contacts[input].displayAll(input);
 }
