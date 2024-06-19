@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miyazawa.kai.0823 <miyazawa.kai.0823@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/17 01:23:07 by miyazawa.ka       #+#    #+#             */
-/*   Updated: 2024/06/19 13:20:19 by miyazawa.ka      ###   ########.fr       */
+/*   Created: 2024/06/19 12:55:41 by miyazawa.ka       #+#    #+#             */
+/*   Updated: 2024/06/19 13:59:17 by miyazawa.ka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-Zombie::Zombie(std::string name)
-{
-	this->_name = name;
-}
+#define N 42
 
-Zombie::~Zombie()
-{
-	std::cout << "Zombie " << this->_name << " is dead." << std::endl;
-}
+int main(void){
+	std::cout << "Creating many zombies." << std::endl;
 
-void	Zombie::announce(void) const
-{
-	std::cout << this->_name << ": " << "BraiiiiiiinnnzzzZ..." << std::endl;
+	Zombie *zombies = zombieHorde(N, "Zombie");
+	std::cout << N << " zombies are created." << std::endl;
+
+	for (int i = 0; i < N; i++){
+		zombies[i].announce();
+	}
+
+	delete [] zombies;
+	return (0);
 }

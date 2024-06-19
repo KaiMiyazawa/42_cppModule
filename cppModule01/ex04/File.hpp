@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   File.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miyazawa.kai.0823 <miyazawa.kai.0823@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/17 01:23:07 by miyazawa.ka       #+#    #+#             */
-/*   Updated: 2024/06/19 13:20:19 by miyazawa.ka      ###   ########.fr       */
+/*   Created: 2024/06/19 15:33:02 by miyazawa.ka       #+#    #+#             */
+/*   Updated: 2024/06/19 16:35:26 by miyazawa.ka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+# ifndef FILE_HPP
+#define FILE_HPP
 
-Zombie::Zombie(std::string name)
-{
-	this->_name = name;
-}
+#include <iostream>
+#include <fstream>
+#include <string>
 
-Zombie::~Zombie()
-{
-	std::cout << "Zombie " << this->_name << " is dead." << std::endl;
-}
+std::string replaceSubstr(std::string &line, std::string s1, std::string s2);
 
-void	Zombie::announce(void) const
+class File
 {
-	std::cout << this->_name << ": " << "BraiiiiiiinnnzzzZ..." << std::endl;
-}
+	private:
+		std::string _filenameIn;
+		std::string _filenameOut;
+	public:
+		File(std::string filename);
+		~File();
+		void replace(std::string s1, std::string s2);
+};
+
+#endif

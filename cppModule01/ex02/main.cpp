@@ -6,35 +6,26 @@
 /*   By: miyazawa.kai.0823 <miyazawa.kai.0823@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:55:41 by miyazawa.ka       #+#    #+#             */
-/*   Updated: 2024/06/19 13:59:03 by miyazawa.ka      ###   ########.fr       */
+/*   Updated: 2024/06/19 14:16:53 by miyazawa.ka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "Zombie.hpp"
+#include <iostream>
 
 int main(void){
-	std::string name;
-	name = "Zombie";
+	std::string brain = "HI THIS IS BRAIN";
+	std::string *brainPtr = &brain;
+	std::string &brainRef = brain;
+	std::string brain2 = brain;
 
-	std::cout << "Creating zombie on the STACK." << std::endl;
-	std::cout << "Zombie name: " << std::flush;
-	std::cin >> name;
+	std::cout << "the memory address of ... =====" << std::endl;
+	std::cout << "String: " << &brain << std::endl;
+	std::cout << "Pointer: " << brainPtr << std::endl;
+	std::cout << "Reference: " << &brainRef << std::endl;
 
-	Zombie zombi_stack(name);
-	zombi_stack.announce();
-
-	name = "Zombie";
-
-	std::cout << "Creating zombie on the HEAP." << std::endl;
-	std::cout << "Zombie name: " << std::flush;
-	std::cin >> name;
-
-	Zombie *zombi_heap = newZombie(name);
-	zombi_heap->announce();
-	delete zombi_heap;
-
-	std::cout << "Calling randomChump()." << std::endl;
-	randomChump("zombie_random");
+	std::cout << "the value of ... ==============" << std::endl;
+	std::cout << "String: " << brain << std::endl;
+	std::cout << "Pointer: " << *brainPtr << std::endl;
+	std::cout << "Reference: " << brainRef << std::endl;
 	return (0);
 }
