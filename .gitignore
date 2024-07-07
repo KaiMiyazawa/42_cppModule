@@ -1,4 +1,7 @@
 *.DS_Store
 *.pdf
 
+
+*.replace
+.vscode
 cppModule00/ex02/19920104_091532.log

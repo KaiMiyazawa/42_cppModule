@@ -6,20 +6,20 @@
 #    By: miyazawa.kai.0823 <miyazawa.kai.0823@st    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 13:32:46 by miyazawa.ka       #+#    #+#              #
-#    Updated: 2024/06/19 16:52:47 by miyazawa.ka      ###   ########.fr        #
+#    Updated: 2024/06/25 00:09:12 by miyazawa.ka      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = replace
+NAME = Harl
 
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 CFLAGS += -g -fsanitize=address
 RM = rm -rf
 
-SRC = main.cpp File.cpp replaceSubStr.cpp
+SRC = main.cpp Harl.cpp
 OBJ = $(SRC:.cpp=.o)
-HEADER = File.hpp
+HEADER = Harl.hpp
 
 all: $(NAME)
 
