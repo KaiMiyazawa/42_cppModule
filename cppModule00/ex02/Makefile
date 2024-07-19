@@ -14,8 +14,6 @@ NAME = Account
 
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
-#CFLAGS += -g -fsanitize=address
-RM = rm -rf
 
 SRC = Account.cpp tests.cpp
 OBJ = $(SRC:.cpp=.o)

@@ -12,6 +12,8 @@
 
 #include "PhoneBook.hpp"
 
+#include <limits>
+
 PhoneBook::PhoneBook()
 {
 }
