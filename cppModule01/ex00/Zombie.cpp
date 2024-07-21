@@ -14,6 +14,7 @@
 
 Zombie::Zombie(std::string name)
 {
+	std::cout << "Zombie " << name << " is born." << std::endl;
 	this->_name = name;
 }
 
