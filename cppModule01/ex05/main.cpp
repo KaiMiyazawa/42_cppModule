@@ -16,7 +16,7 @@ int main(void)
 {
 	std::string input = "hello";
 	Harl harl;
-	while (input.compare("exit"))
+	while (input.compare("exit") && input.compare("EXIT"))
 	{
 		std::cout << "Enter a lavel: ";
 		std::cin >> input;

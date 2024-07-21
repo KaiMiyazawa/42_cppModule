@@ -12,23 +12,23 @@
 
 NAME = Account
 
-CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = Account.cpp tests.cpp
-OBJ = $(SRC:.cpp=.o)
+SRCS = Account.cpp tests.cpp
+OBJS = $(SRCS:.cpp=.o)
 HEADER = Account.hpp
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(HEADER)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+$(NAME): $(OBJS) $(HEADER)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
-$(OBJ): $(SRC)
-	$(CC) $(CFLAGS) -c $(SRC)
+$(OBJS): $(SRCS)
+	$(CXX) $(CXXFLAGS) -c $(SRCS)
 
 clean:
-	rm -rf $(OBJ)
+	rm -rf $(OBJS)
 
 fclean: clean
 	rm -rf $(NAME)

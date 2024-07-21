@@ -49,4 +49,6 @@ void Harl::complain(std::string lavel)
 		i++;
 	if (i < 4)
 		(this->*funcs[i])();
+	else if (lavel.compare("exit") && lavel.compare("EXIT"))
+		std::cout << "Invalid lavel" << std::endl;
 }

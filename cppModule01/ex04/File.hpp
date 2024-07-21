@@ -15,7 +15,7 @@
 
 #include <iostream>
 #include <fstream>
-#include <string>
+#include <cstdlib>
 
 std::string replaceSubstr(std::string &line, std::string s1, std::string s2);
 

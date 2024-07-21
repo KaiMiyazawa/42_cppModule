@@ -23,8 +23,8 @@ File::~File()
 
 void File::replace(std::string s1, std::string s2)
 {
-	std::ifstream infile(this->_filenameIn);
-	std::ofstream outfile(this->_filenameOut);
+	std::ifstream infile(this->_filenameIn.c_str());
+	std::ofstream outfile(this->_filenameOut.c_str());
 	std::string line;
 
 	if (infile.is_open())
@@ -45,7 +45,7 @@ void File::replace(std::string s1, std::string s2)
 	else
 	{
 		std::cerr << "Error: could not open file." << std::endl;
-		exit(EXIT_FAILURE);
+		return ;
 	}
 	infile.close();
 	outfile.close();

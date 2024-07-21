@@ -22,12 +22,12 @@ HumanB::~HumanB()
 {
 }
 
-void	HumanB::setWeapon(Weapon &weapon)
+void	HumanB::setWeapon(Weapon& weapon)
 {
 	this->_weapon = &weapon;
 }
 
-void	HumanB::attack(void)
+void	HumanB::attack(void) const
 {
 	if (this->_weapon == NULL || this->_weapon->getType() == "")
 		std::cout << this->_name << " attacks with no weapon" << std::endl;
