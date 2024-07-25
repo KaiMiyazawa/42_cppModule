@@ -6,7 +6,7 @@
 /*   By: miyazawa.kai.0823 <miyazawa.kai.0823@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:55:41 by miyazawa.ka       #+#    #+#             */
-/*   Updated: 2024/06/19 13:59:17 by miyazawa.ka      ###   ########.fr       */
+/*   Updated: 2024/07/25 22:54:52 by miyazawa.ka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main(void){
 
 	if (zombies)
 		std::cout << N << " zombies are created." << std::endl;
-	
+
 	if (zombies)
 	{
 		for (int i = 0; i < N; i++){

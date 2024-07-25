@@ -6,7 +6,7 @@
 /*   By: miyazawa.kai.0823 <miyazawa.kai.0823@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:55:41 by miyazawa.ka       #+#    #+#             */
-/*   Updated: 2024/06/19 13:59:03 by miyazawa.ka      ###   ########.fr       */
+/*   Updated: 2024/07/25 22:52:38 by miyazawa.ka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int main(void){
 	std::string name;
 	name = "Zombie";
 
-	std::cout << "Creating zombie on the STACK." << std::endl;
+	std::cout << "Zombie on the STACK." << std::endl;
 	std::cout << "Zombie name: " << std::flush;
 	std::cin >> name;
 
@@ -26,7 +26,7 @@ int main(void){
 
 	name = "Zombie";
 
-	std::cout << "Creating zombie on the HEAP." << std::endl;
+	std::cout << "Zombie on the HEAP." << std::endl;
 	std::cout << "Zombie name: " << std::flush;
 	std::cin >> name;
 
@@ -34,7 +34,6 @@ int main(void){
 	zombi_heap->announce();
 	delete zombi_heap;
 
-	std::cout << "Calling randomChump()." << std::endl;
 	randomChump("zombie_random");
 	return (0);
 }
