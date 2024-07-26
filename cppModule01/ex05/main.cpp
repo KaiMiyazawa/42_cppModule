@@ -20,6 +20,8 @@ int main(void)
 	{
 		std::cout << "Enter a lavel: ";
 		std::cin >> input;
+		if (std::cin.eof())
+			break;
 		harl.complain(input);
 	}
 	return 0;

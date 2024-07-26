@@ -23,6 +23,12 @@ File::~File()
 
 void File::replace(std::string s1, std::string s2)
 {
+	if (s1 == "")
+	{
+		std::cerr << "Error: s1 is empty." << std::endl;
+		return ;
+	}
+
 	std::ifstream infile(this->_filenameIn.c_str());
 	std::ofstream outfile(this->_filenameOut.c_str());
 	std::string line;
@@ -58,6 +64,7 @@ std::string replaceSubstr(std::string &line, std::string s1, std::string s2)
 	size_t startPos = 0;
 	size_t endPos;
 	std::string tmp;
+
 	while (true)
 	{
 		endPos = line.find(s1, startPos);
