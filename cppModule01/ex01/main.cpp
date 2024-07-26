@@ -19,11 +19,10 @@ int main(void){
 	Zombie *zombies = zombieHorde(N, "Zombie");
 
 	if (zombies)
-		std::cout << N << " zombies are created." << std::endl;
-
-	if (zombies)
 	{
-		for (int i = 0; i < N; i++){
+		std::cout << N << " zombies are created." << std::endl;
+		for (int i = 0; i < N; i++)
+		{
 			zombies[i].announce();
 		}
 	}
