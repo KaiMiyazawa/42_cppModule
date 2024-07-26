@@ -49,6 +49,7 @@ void ClapTrap::attack(const std::string& target)
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
+    // ここらへんの"ClapTrac"はいらないかも
     if (this->_hitPoints == 0)
     {
         std::cout << "ClapTrap " << _name << " has no hit points" << std::endl;
