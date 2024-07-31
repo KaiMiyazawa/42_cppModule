@@ -6,7 +6,7 @@
 /*   By: miyazawa.kai.0823 <miyazawa.kai.0823@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:35:53 by miyazawa.ka       #+#    #+#             */
-/*   Updated: 2024/07/25 22:56:46 by miyazawa.ka      ###   ########.fr       */
+/*   Updated: 2024/07/31 22:14:15 by miyazawa.ka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,19 @@ void File::replace(std::string s1, std::string s2)
 	}
 
 	std::ifstream infile(this->_filenameIn.c_str());
-	std::ofstream outfile(this->_filenameOut.c_str());
 	std::string line;
 
 	if (infile.is_open())
 	{
 		if (std::getline(infile, line, '\0'))
 		{
+			std::ofstream outfile(this->_filenameOut.c_str());
 			if (line.find(s1) != std::string::npos)
 			{
 				line = replaceSubstr(line, s1, s2);
 			}
 			outfile << line;
+			outfile.close();
 		}
 		else
 		{
@@ -54,7 +55,6 @@ void File::replace(std::string s1, std::string s2)
 		return ;
 	}
 	infile.close();
-	outfile.close();
 	return ;
 }
 
