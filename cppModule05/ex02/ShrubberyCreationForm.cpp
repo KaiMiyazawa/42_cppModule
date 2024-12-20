@@ -1,5 +1,9 @@
 #include "ShrubberyCreationForm.hpp"
 
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreationForm", 145, 137), _target("default")
+{
+}
+
 ShrubberyCreationForm::ShrubberyCreationForm(std::string const &target) : AForm("ShrubberyCreationForm", 145, 137), _target(target)
 {
 }
@@ -21,8 +25,10 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 {
 }
 
-void ShrubberyCreationForm::action() const
+void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
+	(void)executor;
+
 	std::ofstream file((_target + "_shrubbery").c_str());
 	if (!file.is_open())
 		throw FileNotOpenedException();

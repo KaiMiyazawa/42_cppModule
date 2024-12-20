@@ -9,15 +9,15 @@ class ShrubberyCreationForm : public AForm
 private:
 	const std::string _target;
 	
-	ShrubberyCreationForm();
 	
 public:
+	ShrubberyCreationForm();
 	ShrubberyCreationForm(std::string const &target);
 	ShrubberyCreationForm(ShrubberyCreationForm const &other);
 	ShrubberyCreationForm &operator=(ShrubberyCreationForm const &other);
 	~ShrubberyCreationForm();
 	
-	void action() const;
+	void execute(Bureaucrat const &executor) const;
 	
 	class FileNotOpenedException : public std::exception
 	{

@@ -19,17 +19,33 @@ Intern::~Intern()
 {
 }
 
+AForm *makeShrubberyCreationForm(std::string const &target)
+{
+	return new ShrubberyCreationForm(target);
+}
+
+AForm *makeRobotomyRequestForm(std::string const &target)
+{
+	return new RobotomyRequestForm(target);
+}
+
+AForm *makePresidentialPardonForm(std::string const &target)
+{
+	return new PresidentialPardonForm(target);
+}
+
 AForm *Intern::makeForm(std::string const &name, std::string const &target)
 {
-	std::string formNames[3] = {
+	const std::string formNames[3] = {
 		"shrubbery creation",
 		"robotomy request",
 		"presidential pardon"
 	};
-	AForm *forms[3] = {
-		new ShrubberyCreationForm(target),
-		new RobotomyRequestForm(target),
-		new PresidentialPardonForm(target)
+	// 関数ポインタの配列
+	AForm *(*createFunctions[3])(std::string const &target) = {
+		&makeShrubberyCreationForm,
+		&makeRobotomyRequestForm,
+		&makePresidentialPardonForm
 	};
 	
 	for (int i = 0; i < 3; i++)
@@ -37,7 +53,7 @@ AForm *Intern::makeForm(std::string const &name, std::string const &target)
 		if (name == formNames[i])
 		{
 			std::cout << "Intern creates " << name << std::endl;
-			return forms[i];
+			return createFunctions[i](target);
 		}
 	}
 	std::cout << "Intern cannot create " << name << std::endl;

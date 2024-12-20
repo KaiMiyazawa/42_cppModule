@@ -17,10 +17,10 @@ int main(void)
 	
 	std::cout << std::endl;
 	
+	AForm *form;
 	try {
 		Intern someRandomIntern;
 		Bureaucrat bureaucrat("Bureaucrat", 1);
-		AForm *form;
 		
 		form = someRandomIntern.makeForm("shrubbery creation", "Bender");
 		bureaucrat.signForm(*form);
@@ -39,6 +39,9 @@ int main(void)
 	}
 	catch (std::exception &e)
 	{
+		// form -> robotomyなら、deleteしないとリークする
+		if (form)
+			delete form;
 		std::cerr << e.what() << std::endl;
 	}
 

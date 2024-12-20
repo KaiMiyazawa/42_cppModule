@@ -1,6 +1,10 @@
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
+AForm::AForm() : _name("default"), _signed(false), _signGrade(1), _execGrade(1)
+{
+}
+
 AForm::AForm(std::string const &name, int signGrade, int execGrade) : _name(name), _signed(false), _signGrade(signGrade), _execGrade(execGrade)
 {
 	if (signGrade < 1 || execGrade < 1)
@@ -63,17 +67,4 @@ std::ostream &operator<<(std::ostream &out, AForm const &form)
 		out << "not signed";
 	out << " and requires grade " << form.getSignGrade() << " to sign and grade " << form.getExecGrade() << " to execute";
 	return out;
-}
-
-void AForm::execute(Bureaucrat const &executor) const
-{
-	if (_signed)
-	{
-		if (executor.getGrade() <= _execGrade)
-			this->action();
-		else
-			throw AForm::GradeTooLowException();
-	}
-	else
-		throw AForm::AFormNotSignedException();
 }

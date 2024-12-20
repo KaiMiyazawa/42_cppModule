@@ -4,7 +4,7 @@
 int main(void)
 {
 	try {
-		Bureaucrat b1("b1", 2);
+		Bureaucrat b1("b1", 1);
 		Form f1("f1", 1, 1);
 		
 		b1.signForm(f1);

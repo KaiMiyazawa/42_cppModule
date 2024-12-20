@@ -3,21 +3,23 @@
 
 #include "AForm.hpp"
 #include <cstdlib>
+#include <stdlib.h>
+#include <time.h>
 
 class RobotomyRequestForm : public AForm
 {
 private:
 	const std::string _target;
 	
-	RobotomyRequestForm();
 
 public:
+	RobotomyRequestForm();
 	RobotomyRequestForm(std::string const &target);
 	RobotomyRequestForm(RobotomyRequestForm const &other);
 	RobotomyRequestForm &operator=(RobotomyRequestForm const &other);
 	~RobotomyRequestForm();
 	
-	void action() const;
+	void execute(Bureaucrat const &executor) const;
 	
 	class RobotomizationFailedException : public std::exception
 	{
