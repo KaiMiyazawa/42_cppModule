@@ -5,6 +5,7 @@
 #include <string>
 #include <cmath>
 #include <iomanip>
+#include <sstream>
 
 typedef enum e_type
 {
@@ -40,9 +41,13 @@ public:
 		virtual const char *what() const throw(){
 			return "Non displayable";
 		};
-	}
-}
+	};
+};
 
-
+int stringToInt(const std::string &str);
+float stringToFloat(const std::string &str);
+double stringToDouble(const std::string &str);
+int isNonDisplayableStr(std::string str);
+t_type judgeType(std::string str);
 
 #endif // SCALARCONVERTER_HPP

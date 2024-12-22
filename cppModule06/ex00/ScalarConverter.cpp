@@ -1,5 +1,10 @@
 #include "ScalarConverter.hpp"
 
+char ScalarConverter::_c = 0;
+int ScalarConverter::_i = 0;
+float ScalarConverter::_f = 0.0f;
+double ScalarConverter::_d = 0.0;
+
 ScalarConverter::ScalarConverter()
 {
 }
@@ -21,6 +26,28 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &src)
 	}
 	return (*this);
 }
+
+int stringToInt(const std::string& str) {
+    std::istringstream iss(str);
+    int result;
+    iss >> result;
+    return result;
+}
+
+float stringToFloat(const std::string& str) {
+    std::istringstream iss(str);
+    float result;
+    iss >> result;
+    return result;
+}
+
+double stringToDouble(const std::string& str) {
+    std::istringstream iss(str);
+    double result;
+    iss >> result;
+    return result;
+}
+
 
 int isNonDisplayableStr(std::string str)
 {
@@ -58,9 +85,9 @@ t_type judgeType(std::string str)
 			isChar = true;
 	}
 	
-	if (point && str.back() == 'f')
+	if (point && str[str.length() - 1] == 'f')
 		return (FLOAT);
-	else if (point && str.back() != 'f')
+	else if (point && str[str.length() - 1] != 'f')
 		return (DOUBLE);
 	else if (isChar)
 		return (CHAR);
@@ -83,36 +110,39 @@ void ScalarConverter::convert(std::string str)
 		std::cout << "int: impossible" << std::endl;
 		std::cout << "float: nanf" << std::endl;
 		std::cout << "double: nan" << std::endl;
+		return ;
 	} else if (t == P_INF){
 		std::cout << "char: impossible" << std::endl;
 		std::cout << "int: impossible" << std::endl;
 		std::cout << "float: inff" << std::endl;
 		std::cout << "double: inf" << std::endl;
+		return ;
 	} else if (t == N_INF){
 		std::cout << "char: impossible" << std::endl;
 		std::cout << "int: impossible" << std::endl;
 		std::cout << "float: -inff" << std::endl;
 		std::cout << "double: -inf" << std::endl;
+		return ;
 	} else if (t == CHAR){
 		_c = str[0];
 		_i = static_cast<int>(str[0]);
 		_f = static_cast<float>(str[0]);
 		_d = static_cast<double>(str[0]);
 	} else if (t == INT){
-		_c = static_cast<char>(std::stoi(str));
-		_i = std::stoi(str);
-		_f = static_cast<float>(std::stoi(str));
-		_d = static_cast<double>(std::stoi(str));
+		_c = static_cast<char>(stringToInt(str));
+		_i = stringToInt(str);
+		_f = static_cast<float>(stringToInt(str));
+		_d = static_cast<double>(stringToInt(str));
 	} else if (t == FLOAT){
-		_c = static_cast<char>(std::stof(str));
-		_i = static_cast<int>(std::stof(str));
-		_f = std::stof(str);
-		_d = static_cast<double>(std::stof(str));
+		_c = static_cast<char>(stringToFloat(str));
+		_i = static_cast<int>(stringToFloat(str));
+		_f = stringToFloat(str);
+		_d = static_cast<double>(stringToFloat(str));
 	} else if (t == DOUBLE){
-		_c = static_cast<char>(std::stod(str));
-		_i = static_cast<int>(std::stod(str));
-		_f = static_cast<float>(std::stod(str));
-		_d = std::stod(str);
+		_c = static_cast<char>(stringToDouble(str));
+		_i = static_cast<int>(stringToDouble(str));
+		_f = static_cast<float>(stringToDouble(str));
+		_d = stringToDouble(str);
 	}
 	
 	if (_c < 32 || _c > 126)
