@@ -1,6 +1,6 @@
 #include "ScalarConverter.hpp"
 
-char ScalarConverter::_c = 0;
+char ScalarConverter::_c = '\0';
 int ScalarConverter::_i = 0;
 float ScalarConverter::_f = 0.0f;
 double ScalarConverter::_d = 0.0;
