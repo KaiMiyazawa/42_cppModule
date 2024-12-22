@@ -12,17 +12,17 @@ class Bureaucrat;
 class AForm
 {
 private:
-	std::string const _name;
+	const std::string _name;
 	bool _signed;
-	int const _signGrade;
-	int const _execGrade;
+	const int _signGrade;
+	const int _execGrade;
 	
 	
 public:
 	AForm();
-	AForm(std::string const &name, int signGrade, int execGrade);
-	AForm(AForm const &other);
-	AForm &operator=(AForm const &other);
+	AForm(const std::string &name, int signGrade, int execGrade);
+	AForm(const AForm &other);
+	AForm &operator=(const AForm &other);
 	virtual ~AForm();
 	
 	std::string getName() const;
@@ -31,7 +31,7 @@ public:
 	int getExecGrade() const;
 	
 	void beSigned(const Bureaucrat &bureaucrat);
-	virtual void execute(Bureaucrat const &executor) const = 0;
+	virtual void execute(const Bureaucrat &executor) const = 0;
 	
 	class GradeTooHighException : public std::exception
 	{
@@ -60,6 +60,6 @@ public:
 	
 };
 
-std::ostream &operator<<(std::ostream &out, AForm const &form);
+std::ostream &operator<<(std::ostream &out, const AForm &form);
 
 #endif // AFORM_HPP

@@ -12,12 +12,12 @@ private:
 	
 public:
 	ShrubberyCreationForm();
-	ShrubberyCreationForm(std::string const &target);
-	ShrubberyCreationForm(ShrubberyCreationForm const &other);
-	ShrubberyCreationForm &operator=(ShrubberyCreationForm const &other);
+	ShrubberyCreationForm(const std::string &target);
+	ShrubberyCreationForm(const ShrubberyCreationForm &other);
+	ShrubberyCreationForm &operator=(const ShrubberyCreationForm &other);
 	~ShrubberyCreationForm();
 	
-	void execute(Bureaucrat const &executor) const;
+	void execute(const Bureaucrat &executor) const;
 	
 	class FileNotOpenedException : public std::exception
 	{

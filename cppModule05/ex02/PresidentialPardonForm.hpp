@@ -11,12 +11,12 @@ private:
 
 public:
 	PresidentialPardonForm();
-	PresidentialPardonForm(std::string const &target);
-	PresidentialPardonForm(PresidentialPardonForm const &other);
-	PresidentialPardonForm &operator=(PresidentialPardonForm const &other);
+	PresidentialPardonForm(const std::string &target);
+	PresidentialPardonForm(const PresidentialPardonForm &other);
+	PresidentialPardonForm &operator=(const PresidentialPardonForm &other);
 	~PresidentialPardonForm();
 	
-	void execute(Bureaucrat const &executor) const;
+	void execute(const Bureaucrat &executor) const;
 };
 
 #endif // PRESIDENTIALPARDONFORM_HPP

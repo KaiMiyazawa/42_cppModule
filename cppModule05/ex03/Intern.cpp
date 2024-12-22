@@ -4,12 +4,12 @@ Intern::Intern()
 {
 }
 
-Intern::Intern(Intern const &other)
+Intern::Intern(const Intern &other)
 {
 	*this = other;
 }
 
-Intern &Intern::operator=(Intern const &other)
+Intern &Intern::operator=(const Intern &other)
 {
 	(void)other;
 	return *this;
@@ -19,22 +19,22 @@ Intern::~Intern()
 {
 }
 
-AForm *makeShrubberyCreationForm(std::string const &target)
+AForm *makeShrubberyCreationForm(const std::string &target)
 {
 	return new ShrubberyCreationForm(target);
 }
 
-AForm *makeRobotomyRequestForm(std::string const &target)
+AForm *makeRobotomyRequestForm(const std::string &target)
 {
 	return new RobotomyRequestForm(target);
 }
 
-AForm *makePresidentialPardonForm(std::string const &target)
+AForm *makePresidentialPardonForm(const std::string &target)
 {
 	return new PresidentialPardonForm(target);
 }
 
-AForm *Intern::makeForm(std::string const &name, std::string const &target)
+AForm *Intern::makeForm(const std::string &name, const std::string &target)
 {
 	const std::string formNames[3] = {
 		"shrubbery creation",
@@ -42,7 +42,7 @@ AForm *Intern::makeForm(std::string const &name, std::string const &target)
 		"presidential pardon"
 	};
 	// 関数ポインタの配列
-	AForm *(*createFunctions[3])(std::string const &target) = {
+	AForm *(*createFunctions[3])(const std::string &target) = {
 		&makeShrubberyCreationForm,
 		&makeRobotomyRequestForm,
 		&makePresidentialPardonForm

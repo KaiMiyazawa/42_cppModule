@@ -8,13 +8,13 @@
 class Bureaucrat
 {
 private:
-	std::string const _name;
+	const std::string _name;
 	int _grade; // 1 to 150 (1 is the highest grade)
 public:
 	Bureaucrat();
-	Bureaucrat(std::string const &name, int grade);
-	Bureaucrat(Bureaucrat const &other);
-	Bureaucrat &operator=(Bureaucrat const &other);
+	Bureaucrat(const std::string &name, int grade);
+	Bureaucrat(const Bureaucrat &other);
+	Bureaucrat &operator=(const Bureaucrat &other);
 	~Bureaucrat();
 
 	std::string getName() const;
@@ -43,6 +43,6 @@ public:
 	};
 };
 
-std::ostream &operator<<(std::ostream &out, Bureaucrat const &bureaucrat);
+std::ostream &operator<<(std::ostream &out, const Bureaucrat &bureaucrat);
 
 #endif // BUREAUCRAT_HPP

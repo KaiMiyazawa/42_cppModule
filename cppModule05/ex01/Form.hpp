@@ -12,17 +12,17 @@ class Bureaucrat;
 class Form
 {
 private:
-	std::string const _name;
+	const std::string _name;
 	bool _signed;
-	int const _signGrade;
-	int const _execGrade;
+	const int _signGrade;
+	const int _execGrade;
 	
 	
 public:
 	Form();
-	Form(std::string const &name, int signGrade, int execGrade);
-	Form(Form const &other);
-	Form &operator=(Form const &other);
+	Form(const std::string &name, int signGrade, int execGrade);
+	Form(const Form &other);
+	Form &operator=(const Form &other);
 	~Form();
 	
 	std::string getName() const;
@@ -51,6 +51,6 @@ public:
 	
 };
 
-std::ostream &operator<<(std::ostream &out, Form const &form);
+std::ostream &operator<<(std::ostream &out, const Form &form);
 
 #endif // FORM_HPP
