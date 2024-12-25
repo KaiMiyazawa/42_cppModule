@@ -1,11 +1,11 @@
-NAME = serializer
+NAME = identify
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS = main.cpp Serializer.cpp
+SRCS = main.cpp Base.cpp A.cpp B.cpp C.cpp
 OBJS = $(SRCS:.cpp=.o)
-HEADER = Serializer.hpp
+HEADER = Base.hpp A.hpp B.hpp C.hpp
 
 all: $(NAME)
 
