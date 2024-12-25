@@ -25,3 +25,5 @@ Data *Serializer::deserialize(uintptr_t raw)
 {
     return reinterpret_cast<Data *>(raw);
 }
+
+// reinterpret_castは、型安全を無視して、ポインタや整数型を別のポインタや整数型に変換します。
