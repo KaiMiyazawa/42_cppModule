@@ -15,7 +15,9 @@ int main()
 	Array<int> numbers4;
 	
 	for (unsigned int i = 0; i < numbers.size(); i++)
+	{
 		numbers[i] = i * 2;
+	}
 		
 	printArray(numbers);
 	printArray(numbers2);
