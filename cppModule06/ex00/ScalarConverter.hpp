@@ -6,6 +6,10 @@
 #include <cmath>
 #include <iomanip>
 #include <sstream>
+#include <climits>
+#include <limits>
+#include <cfloat>
+
 
 typedef enum e_type
 {

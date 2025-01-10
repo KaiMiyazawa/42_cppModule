@@ -22,7 +22,10 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &src)
 {
 	if (this != &src)
 	{
-		*this = src;
+		_c = src._c;
+		_i = src._i;
+		_f = src._f;
+		_d = src._d;
 	}
 	return (*this);
 }
@@ -95,6 +98,36 @@ t_type judgeType(std::string str)
 		return (INT);
 }
 
+bool checkOverflowInt(std::string str)
+{
+	std::istringstream iss(str);
+	long long int trueValue;
+	iss >> trueValue;
+	if (trueValue > INT_MAX || trueValue < INT_MIN)
+		return (true);
+	return (false);
+}
+
+bool checkOverflowFloat(std::string str)
+{
+	std::istringstream iss(str);
+	long double trueValue;
+	iss >> trueValue;
+	if (trueValue > FLT_MAX || trueValue < -FLT_MAX)
+		return (true);
+	return (false);
+}
+
+bool checkOverflowDouble(std::string str)
+{
+	std::istringstream iss(str);
+	long double trueValue;
+	iss >> trueValue;
+	if (trueValue > DBL_MAX || trueValue < -DBL_MAX)
+		return (true);
+	return (false);
+}
+
 void ScalarConverter::convert(std::string str)
 {
 	if (isNonDisplayableStr(str))
@@ -104,6 +137,10 @@ void ScalarConverter::convert(std::string str)
 	}
 	
 	t_type t = judgeType(str);
+	
+	bool isOverflowInt = false;
+	bool isOverflowFloat = false;
+	bool isOverflowDouble = false;
 	
 	if (t == NANF){
 		std::cout << "char: impossible" << std::endl;
@@ -130,18 +167,28 @@ void ScalarConverter::convert(std::string str)
 		_d = static_cast<double>(str[0]);
 	} else if (t == INT){
 		_c = static_cast<char>(stringToInt(str));
+		checkOverflowInt(str) ? isOverflowInt = true : 0;
 		_i = stringToInt(str);
-		_f = static_cast<float>(stringToInt(str));
-		_d = static_cast<double>(stringToInt(str));
+		checkOverflowFloat(str) ? isOverflowFloat = true : 0;
+		_f = static_cast<float>(stringToFloat(str));
+		checkOverflowDouble(str) ? isOverflowDouble = true : 0;
+		_d = static_cast<double>(stringToDouble(str));
 	} else if (t == FLOAT){
-		_c = static_cast<char>(stringToFloat(str));
-		_i = static_cast<int>(stringToFloat(str));
-		_f = stringToFloat(str);
-		_d = static_cast<double>(stringToFloat(str));
+		std::string str_f = str.substr(0, str.length() - 1);
+		checkOverflowInt(str_f) ? isOverflowInt = true : 0;
+		_c = static_cast<char>(stringToInt(str_f));
+		_i = static_cast<int>(stringToInt(str_f));
+		checkOverflowFloat(str_f) ? isOverflowFloat = true : 0;
+		_f = stringToFloat(str_f);
+		checkOverflowDouble(str_f) ? isOverflowDouble = true : 0;
+		_d = static_cast<double>(stringToDouble(str_f));
 	} else if (t == DOUBLE){
-		_c = static_cast<char>(stringToDouble(str));
-		_i = static_cast<int>(stringToDouble(str));
-		_f = static_cast<float>(stringToDouble(str));
+		checkOverflowInt(str) ? isOverflowInt = true : 0;
+		_c = static_cast<char>(stringToInt(str));
+		_i = static_cast<int>(stringToInt(str));
+		checkOverflowFloat(str) ? isOverflowFloat = true : 0;
+		_f = static_cast<float>(stringToFloat(str));
+		checkOverflowDouble(str) ? isOverflowDouble = true : 0;
 		_d = stringToDouble(str);
 	}
 	
@@ -149,7 +196,25 @@ void ScalarConverter::convert(std::string str)
 		std::cout << "char: Non displayable" << std::endl;
 	else
 		std::cout << "char: '" << _c << "'" << std::endl;
-	std::cout << "int: " << _i << std::endl;
-	std::cout << "float: " << std::fixed << std::setprecision(1) << _f << "f" << std::endl;
-	std::cout << "double: " << std::fixed << std::setprecision(1) << _d << std::endl;
+		
+	if (isOverflowInt)
+		std::cout << "int: Overflow" << std::endl;
+	else
+		std::cout << "int: " << _i << std::endl;
+		
+	std::ostringstream oss;
+	oss << _f;
+	std::string s = oss.str();
+		
+	if (isOverflowFloat)
+		std::cout << "float: Overflow" << std::endl;
+	else if (s.find('.') == std::string::npos)
+		std::cout << "float: " << _f << std::endl;
+	else
+		std::cout << "float: " << _f << "f" << std::endl;
+		
+	if (isOverflowDouble)
+		std::cout << "double: Overflow" << std::endl;
+	else
+		std::cout << "double: "  << _d << std::endl;
 }
