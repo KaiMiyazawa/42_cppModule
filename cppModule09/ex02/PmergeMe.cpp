@@ -103,6 +103,30 @@ static void binaryInsert(T & S, const typename T::value_type & val) {
 	S.insert(it, val);
 }
 
+template <typename SizeT>
+static std::vector<SizeT> generateGroupSizes(SizeT Pn) {
+	std::vector<SizeT> sizes;
+	if (Pn == 0) return sizes;
+	
+	// 最初の2つは固定
+	sizes.push_back(2);
+	if (Pn == 1) return sizes;
+	sizes.push_back(2);
+	
+	SizeT sumSoFar = sizes[0] + sizes[1];
+	
+	// ここでは k を段階的に上げながら作り続ける
+	SizeT k = 2;
+	while (sumSoFar < Pn) {
+		SizeT power = static_cast<SizeT>(1) << (k + 1); // 2^(k+1)
+		SizeT nextSize = power - sizes.back();
+		sizes.push_back(nextSize);
+		sumSoFar += nextSize;
+		++k;
+	}
+	return sizes;
+}
+
 template <typename T>
 void PmergeMe<T>::sort() {
 	typedef typename T::size_type Size;
@@ -157,15 +181,16 @@ void PmergeMe<T>::sort() {
 	// devide and decide insertion order
 	Size Pn = pendings.size();
 	std::vector<Size> insertionOrder;
-	
-	const int groupSizes[] = {2, 2, 6, 10, 22, 42, 86, 170};// あとでハードコードから変更
-	const int numGroupSizes = sizeof(groupSizes) / sizeof(groupSizes[0]);
+	std::vector<Size> groupSizes = generateGroupSizes<Size>(Pn);
 	Size processed = 0;
-	for (int g = 0; g < numGroupSizes && processed < Pn; ++g) {
-		int currentGroup = groupSizes[g];
-		int actualGroupSize = (processed + currentGroup <= Pn) ? currentGroup : (Pn - processed);
-		for (int j = 0; j < actualGroupSize; ++j) {
-			insertionOrder.push_back(processed + actualGroupSize - 1 - j);
+	for (Size g = 0; g < groupSizes.size() && processed < Pn; ++g) {
+		Size currentGroup = groupSizes[g];
+		Size actualGroupSize = (processed + currentGroup <= Pn)
+								? currentGroup
+								: (Pn - processed);
+
+		for (Size j = 0; j < actualGroupSize; ++j) {
+			insertionOrder.push_back(processed + (actualGroupSize - 1 - j));
 		}
 		processed += currentGroup;
 	}
@@ -177,7 +202,6 @@ void PmergeMe<T>::sort() {
 	}
 	if (insertionOrder.size() > Pn)
 		insertionOrder.resize(Pn);
-	
 	
 	// insert pending
 	for (Size k = 0; k < insertionOrder.size(); ++k) {
