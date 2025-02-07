@@ -1,5 +1,5 @@
-#ifndef easyfind_HPP
-#define easyfind_HPP
+#ifndef EASYFIND_HPP
+#define EASYFIND_HPP
 
 #include <algorithm>
 #include <iostream>

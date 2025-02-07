@@ -1,11 +1,11 @@
-NAME = mutantStack
+NAME = PmergeMe
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS = main.cpp
+SRCS = main.cpp PmergeMe.cpp
 OBJS = $(SRCS:.cpp=.o)
-HEADER = MutantStack.hpp
+HEADER = PmergeMe.hpp
 
 all: $(NAME)
 

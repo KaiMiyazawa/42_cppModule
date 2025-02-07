@@ -1,12 +1,12 @@
+#ifndef BITCOINEXCHANGE_HPP
+#define BITCOINEXCHANGE_HPP
+
 #include <iostream>
 #include <fstream>
 #include <map>
-#include <vector>
 #include <exception>
 #include <cmath>
 #include <string>
-
-
 
 class BitcoinExchange
 {
@@ -69,3 +69,5 @@ public:
 		}
 	};
 };
+
+#endif // BITCOINEXCHANGE_HPP

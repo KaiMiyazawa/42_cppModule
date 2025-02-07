@@ -1,3 +1,6 @@
+#ifndef MUTANTSTACK_HPP
+#define MUTANTSTACK_HPP
+
 #include <iostream>
 #include <algorithm>
 #include <list>
@@ -24,3 +27,5 @@ public:
 	iterator begin() { return std::stack<T, Container>::c.begin(); }
 	iterator end() { return std::stack<T, Container>::c.end(); }
 };
+
+#endif
