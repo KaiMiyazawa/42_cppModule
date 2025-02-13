@@ -3,13 +3,6 @@
 
 #include <algorithm>
 #include <iostream>
-
-#include <vector>
-#include <list>
-#include <deque>
-#include <forward_list>
-#include <array>
-
 #include <exception>
 
 class notFound : public std::exception

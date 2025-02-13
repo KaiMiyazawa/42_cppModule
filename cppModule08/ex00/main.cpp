@@ -1,40 +1,50 @@
 #include "easyfind.hpp"
-#include <algorithm>
+#include <vector>
+#include <list>
+#include <deque>
+#include <iostream>
 
 int main()
 {
-	std::vector<int> vect;
-	for (int i = 0; i < 10; i++)
-		vect.push_back(i);
-	std::list<int> list;
-	for (int i = 0; i < 10; i++)
-		list.push_back(i);
-	std::deque<int> deque;
-	for (int i = 0; i < 10; i++)
-		deque.push_back(i);
-	std::forward_list<int> forward_list;
-	for (int i = 0; i < 10; i++)
-		forward_list.push_front(i);
-	std::array<int, 10> array;
-	for (int i = 0; i < 10; i++)
-		array[i] = i;
-	std::stack<int> stack;
-	for (int i = 0; i < 10; i++)
-		stack.push(i);
-	std::queue<int> queue;
-	for (int i = 0; i < 10; i++)
-		queue.push(i);
-	
+    std::vector<int> vect;
+    std::list<int> lst;
+    std::deque<int> dq;
+
+    for (int i = 0; i < 10; ++i) {
+        vect.push_back(i);
+        lst.push_back(i);
+        dq.push_back(i);
+    }
+
+    try {
+        std::cout << "Vector find 5: " << *easyfind(vect, 5) << std::endl;
+        std::cout << "List   find 5: " << *easyfind(lst, 5) << std::endl;
+        std::cout << "Deque  find 5: " << *easyfind(dq, 5) << std::endl;
+    }
+    catch (const std::exception &e) {
+        std::cerr << e.what() << std::endl;
+    }
+
+    try {
+        std::cout << "Deque find 42: " << *easyfind(dq, 42) << std::endl;
+    }
+    catch (const std::exception &e) {
+        std::cerr << "Deque find 42: " << e.what() << std::endl;
+    }
+
 	try {
-		std::cout << "Vector: " << *easyfind(vect, 5) << std::endl;
-		std::cout << "List: " << *easyfind(list, 5) << std::endl;
-		std::cout << "Deque: " << *easyfind(deque, 5) << std::endl;
-		std::cout << "Forward List: " << *easyfind(forward_list, 10) << std::endl;
-		std::cout << "Array: " << *easyfind(array, 10) << std::endl;
+		std::cout << "Vector find 42: " << *easyfind(vect, 42) << std::endl;
 	}
-	catch (std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
+	catch (const std::exception &e) {
+		std::cerr << "Vector find 42: " << e.what() << std::endl;
 	}
-	return 0;
+
+	try {
+		std::cout << "List find 42: " << *easyfind(lst, 42) << std::endl;
+	}
+	catch (const std::exception &e) {
+		std::cerr << "List find 42: " << e.what() << std::endl;
+	}
+
+    return 0;
 }
