@@ -3,13 +3,15 @@
 #define RPN_HPP
 
 #include <stack>
+#include <list>
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <limits>
 
 class RPN {
 private:
-	std::stack<int> _stack;
+	std::stack<int, std::list<int>> _stack;
 
 	// スタックの上位2つの要素を取り出して演算し、結果をプッシュする
 	typedef int (*BinaryOp)(int, int);

@@ -21,4 +21,6 @@ int main(int argc, char **argv)
 0
 ./RPN "(1 + 1)"
 Error
+./RPN "8 8 8 8 8 8 8 8 8 8 2 * * * * * * * * * *"
+Error
 */

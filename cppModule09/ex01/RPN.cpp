@@ -35,13 +35,35 @@ bool RPN::hasEnoughOperands() const {
 	return this->_stack.size() >= 2;
 }
 
-int add(int a, int b) { return a + b; }
-int sub(int a, int b) { return a - b; }
-int mul(int a, int b) { return a * b; }
+int add(int a, int b) {
+	if ((b > 0 && a > std::numeric_limits<int>::max() - b) ||
+		(b < 0 && a < std::numeric_limits<int>::min() - b)) {
+		throw std::overflow_error("addition overflow");
+	}
+	return a + b;
+}
+int sub(int a, int b) {
+	if ((b > 0 && a < std::numeric_limits<int>::min() + b) ||
+		(b < 0 && a > std::numeric_limits<int>::max() + b)) {
+		throw std::overflow_error("subtraction overflow");
+	}
+	return a - b;
+}
+int mul(int a, int b) {
+	if (a == 0 || b == 0) {
+		return 0;
+	}
+	if (a > std::numeric_limits<int>::max() / b || a < std::numeric_limits<int>::min() / b) {
+		throw std::overflow_error("multiplication overflow");
+	}
+	return a * b;
+}
 int div_op(int a, int b) {
 	if (b == 0) {
-		std::cerr << "Error" << std::endl;
 		throw divisionByZeroException();
+	}
+	if (a == std::numeric_limits<int>::min() && b == -1) {
+		throw std::overflow_error("division overflow");
 	}
 	return a / b;
 }
@@ -85,10 +107,17 @@ void RPN::calculate(const std::string &expression) {
 				_stack.push(num);
 			} else {
 				throw invalidExpressionException();
+				return ;
 			}
 		}
 	} catch (std::exception &e) {
 		std::cerr << "Error: " << e.what() << std::endl;
+		return ;
+	}
+	
+	if (_stack.size() != 1) {
+		std::cerr << "Error: invalid expression" << std::endl;
+		return ;
 	}
 	std::cout << this->_stack.top() << std::endl;
 	return ;
