@@ -1,15 +1,48 @@
 # cpp Module 09
-about C++ STL.
-C++のSTLについて学びます。
+This module is about Standard Template Library (STL) in C++.
+このモジュールはC++の標準テンプレートライブラリ（STL）についてです。
 
-# ex00
-Using std::map, created a program that manages a time series price table for Bitcoin and displays the price at a certain point in the past.
-std::mapを使って、Bitcoinの時系列価格表を管理し、過去のある時点での価格を表示するプログラムを作成しました。
+## ex00 Bitcoin Exchange
+This is a program that manages a time series price table for Bitcoin and displays the price at a certain point in the past.
+Bitcoinの時系列価格表を管理し、過去のある時点での価格を表示するプログラムです。
 
-# ex01
-Using std::stack, created a calculator in reverse Polish notation.
-std::stackを使って、逆ポーランド記法の計算機を作成しました。
+### Usage
+```shell
+make
+./btc
+```
 
-# ex02
-Using std::vector and std::deque, Created a program that sorts a sequence using merge-insertion-sort.
-std::vectorとstd::dequeを使って、merge-insertion-sortで数列をソートするプログラムを作成しました。
+### What I learned
+I learned about std::map in C++.
+C++のstd::mapについて学びました。
+
+## ex01 Reverse Polish Notation
+This is a calculator in reverse Polish notation.
+逆ポーランド記法の計算機です。
+
+### Usage
+```shell
+make
+./RPN
+```
+
+### What I learned
+I learned about std::stack in C++.
+C++のstd::stackについて学びました。
+
+## ex02 PmergeMe
+This is a program that sorts a sequence using merge-insertion-sort.
+merge-insertion-sortで数列をソートするプログラムです。
+
+### Usage
+```shell
+make
+./PmergeMe
+```
+
+### What I learned
+I learned about std::vector and std::deque in C++.
+C++のstd::vectorとstd::dequeについて学びました.
+
+That's all.
+以上です。
