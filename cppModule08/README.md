@@ -34,6 +34,9 @@ C++のテンプレートコンテナ、イテレータ、アルゴリズム(特�
 This is a class `MutantStack` that is a template class that is a stack that inherits from `std::stack` and has iterators.
 `std::stack`を継承し、イテレータを持つスタックであるテンプレートクラスである`MutantStack`クラスです。
 
+> [!WARNING]
+> addNumbersメソッドを作ってないので、-10点です。
+
 ### Usage
 ```shell
 make
@@ -43,6 +46,9 @@ make
 ### What I learned
 I learned about Templated containers (especially `std::stack`), iterators, algorithms in C++.
 C++のテンプレートコンテナ(特に`std::stack`)、イテレータ、アルゴリズムについて学びました。
+
+> [!WARNING]
+> more tests をちゃんと作ってないので、-10点です。
 
 That's all.
 以上です。
