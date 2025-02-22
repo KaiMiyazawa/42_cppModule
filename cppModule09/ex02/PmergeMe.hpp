@@ -4,14 +4,12 @@
 #include <iostream>
 #include <vector>
 #include <deque>
-#include <ctime>
 #include <iomanip>
 #include <sstream>
 #include <algorithm>
-#include <stdexcept>
 #include <limits>
-#include <chrono>
 #include <sys/time.h>
+#include <typeinfo>
 
 template <typename T>
 class PmergeMe {

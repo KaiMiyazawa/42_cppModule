@@ -25,17 +25,21 @@ template <typename T>
 PmergeMe<T>::PmergeMe() {
 	_time_start = getMicroseconds();
 	
-	std::stringstream ss("1 2 3 4 5 6 7 8 9 10");
+	std::stringstream ss("");
 	std::string s;
 	while (ss >> s) {
 		if (is_digit_string(s) == false) {
 			throw std::invalid_argument("Error: invalid sequence");
 		}
-		long long lln = std::stoll(s);
-		if (lln > INT_MAX || lln < 0) {
+
+		long long lln;
+		std::stringstream(s) >> lln;
+
+		if (lln > std::numeric_limits<int>::max() || lln < 0) {
 			throw std::invalid_argument("Error: invalid sequence");
 		}
-		int n = std::stoi(s);
+		int n;
+		std::stringstream(s) >> n;
 		_sequence.push_back(n);
 	}
 }
@@ -50,11 +54,15 @@ PmergeMe<T>::PmergeMe(std::string sequence) {
 		if (is_digit_string(s) == false) {
 			throw std::invalid_argument("Error: invalid sequence");
 		}
-		long lln = std::stoll(s);
-		if (lln > INT_MAX || lln < 0) {
+
+		long lln;
+		std::stringstream(s) >> lln;
+
+		if (lln > std::numeric_limits<int>::max() || lln < 0) {
 			throw std::invalid_argument("Error: invalid sequence");
 		}
-		int n = std::stoi(s);
+		int n;
+		std::stringstream(s) >> n;
 		_sequence.push_back(n);
 	}
 }

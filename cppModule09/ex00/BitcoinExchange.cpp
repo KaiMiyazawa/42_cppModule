@@ -30,10 +30,17 @@ bool dateFormatCheck(const std::string &date)
 
 bool dateValidCheck(const std::string &date)
 {
-	int year = std::stoi(date.substr(0, 4));
-	int month = std::stoi(date.substr(5, 2));
-	int day = std::stoi(date.substr(8, 2));
-	
+	// int year = std::stoi(date.substr(0, 4));
+	// int month = std::stoi(date.substr(5, 2));
+	// int day = std::stoi(date.substr(8, 2));
+	// c++98
+	int year;
+	std::istringstream(date.substr(0, 4)) >> year;
+	int month;
+	std::istringstream(date.substr(5, 2)) >> month;
+	int day;
+	std::istringstream(date.substr(8, 2)) >> day;
+
 	if (year < 2000 || year > 2100)
 		return true;
 	if (month < 1 || month > 12)
@@ -74,7 +81,7 @@ bool valueValueCheck(const std::string &value)
  
 BitcoinExchange::BitcoinExchange() : _input_filename("input.txt")
 {
-	std::ifstream file(_input_filename);
+	std::ifstream file(_input_filename.c_str());
 	if (!file.is_open())
 		throw FileOpenException();
 		
@@ -90,13 +97,16 @@ BitcoinExchange::BitcoinExchange() : _input_filename("input.txt")
 			continue;
 		//format: date,exchange_rate
 		//format: YYYY-MM-DD,float
-		_csv_data[line.substr(0, line.find(','))] = std::stof(line.substr(line.find(',') + 1));
+		// float exchange_rate = std::stof(line.substr(line.find(',') + 1));
+		float exchange_rate;
+		std::istringstream(line.substr(line.find(',') + 1)) >> exchange_rate;
+		_csv_data[line.substr(0, line.find(','))] = exchange_rate;
 	}
 }
 
 BitcoinExchange::BitcoinExchange(const std::string &filename) : _input_filename(filename)
 {
-	std::ifstream file(_input_filename);
+	std::ifstream file(_input_filename.c_str());
 	if (!file.is_open())
 		throw FileOpenException();
 		
@@ -112,7 +122,10 @@ BitcoinExchange::BitcoinExchange(const std::string &filename) : _input_filename(
 			continue;
 		//format: date,exchange_rate
 		//format: YYYY-MM-DD,float
-		_csv_data[line.substr(0, line.find(','))] = std::stof(line.substr(line.find(',') + 1));
+		// float exchange_rate = std::stof(line.substr(line.find(',') + 1));
+		float exchange_rate;
+		std::istringstream(line.substr(line.find(',') + 1)) >> exchange_rate;
+		_csv_data[line.substr(0, line.find(','))] = exchange_rate;
 	}
 }
 
@@ -137,7 +150,7 @@ void BitcoinExchange::setFilename(const std::string &filename)
 {
 	this->_input_filename = filename;
 	
-	std::ifstream file(_input_filename);
+	std::ifstream file(_input_filename.c_str());
 	if (!file.is_open())
 		throw FileOpenException();
 }
@@ -160,7 +173,7 @@ float BitcoinExchange::calcPrice(float value, const std::string &date)
 
 void BitcoinExchange::display()
 {
-	std::ifstream file(_input_filename);
+	std::ifstream file(_input_filename.c_str());
 	if (!file.is_open())
 		throw FileOpenException();
 		
@@ -194,7 +207,10 @@ void BitcoinExchange::display()
 				throw FileFormatException(line);
 			
 			// convert value_str to float
-			float value = std::stof(value_str);
+			// float value = std::stof(value_str);
+			// c++98
+			float value;
+			std::istringstream(value_str) >> value;
 			
 			// validcheck
 			if (value <= 0)
