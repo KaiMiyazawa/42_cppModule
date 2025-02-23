@@ -30,6 +30,9 @@ make
 I learned about std::stack in C++.
 C++のstd::stackについて学びました。
 
+[!WARNING]
+> strptime()での実装の方が良かった可能性はあります。提出の段階ではstringを使って実装しています。
+
 ## ex02 PmergeMe
 This is a program that sorts a sequence using merge-insertion-sort.
 merge-insertion-sortで数列をソートするプログラムです。
