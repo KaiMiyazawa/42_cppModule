@@ -139,11 +139,17 @@ BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) : _input_filename
 
 BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other)
 {
-	if (this == &other)
-		return *this;
-	this->_input_filename = other._input_filename;
-	this->_csv_data = other._csv_data;
+	if (this == &other) {
+		BitcoinExchange tmp(other);
+		tmp.swap(*this);
+	}
 	return *this;
+}
+
+void BitcoinExchange::swap(BitcoinExchange &other)
+{
+	std::swap(this->_input_filename, other._input_filename);
+	std::swap(this->_csv_data, other._csv_data);
 }
 
 void BitcoinExchange::setFilename(const std::string &filename)

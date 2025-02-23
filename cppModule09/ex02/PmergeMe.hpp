@@ -10,6 +10,8 @@
 #include <limits>
 #include <sys/time.h>
 #include <typeinfo>
+#include <utility>
+//#include "Integer.hpp"//for-test
 
 template <typename T>
 class PmergeMe {
@@ -24,6 +26,8 @@ public:
 	~PmergeMe();
 	PmergeMe(PmergeMe const &src);
 	PmergeMe &operator=(PmergeMe const &rhs);
+	
+	void swap(PmergeMe &other);
 	
 	T getSequence() const;
 

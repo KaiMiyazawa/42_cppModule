@@ -8,6 +8,7 @@
 #include <exception>
 #include <cmath>
 #include <string>
+#include <utility>
 
 class BitcoinExchange
 {
@@ -22,6 +23,8 @@ public:
 	~BitcoinExchange();
 	BitcoinExchange(const BitcoinExchange &other);
 	BitcoinExchange &operator=(const BitcoinExchange &other);
+	
+	void swap(BitcoinExchange &other);
 	
 	void setFilename(const std::string &filename);
 	void display();

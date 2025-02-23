@@ -1,4 +1,7 @@
 #include "PmergeMe.hpp"
+//#include "Integer.hpp"//for-test
+
+//size_t Integer::count = 0;//for-test
 
 int main(int argc, char** argv) {
 	if (argc < 2) {
@@ -39,11 +42,40 @@ int main(int argc, char** argv) {
 	} catch (std::out_of_range &e) {
 		// stoll
 		std::cerr << "Error: " << e.what() << std::endl;
+		return 1;
 	} catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;
+		return 1;
 	}
 	
-	// // sort check
+	//// Integer ===============
+	//try {
+	//	PmergeMe<std::vector<Integer> > v(concatenated_argvs);
+	//	v.sort();
+		
+	//	std::cout << "Integer::count = " << Integer::count << std::endl;
+		
+	//	std::cout << "Before:\t";
+	//	std::stringstream ss(concatenated_argvs);
+	//	int n;
+	//	while (ss >> n) {
+	//		std::cout << n << " ";
+	//	}
+	//	std::cout << std::endl;
+	//	std::cout << "After:\t";
+	//	v.printSequence();
+	//	v.benchmark();
+		
+	//} catch (std::out_of_range &e) {
+	//	// stoll
+	//	std::cerr << "Error: " << e.what() << std::endl;
+	//	return 1;
+	//} catch (std::exception &e) {
+	//	std::cerr << e.what() << std::endl;
+	//	return 1;
+	//}
+	
+	//// sort check ===============
 	// try {
 	// 	PmergeMe<std::vector<int> > v(concatenated_argvs);
 	// 	v.sort();
@@ -90,6 +122,7 @@ int main(int argc, char** argv) {
 	// 	}
 	// } catch (std::exception &e) {
 	// 	std::cerr << e.what() << std::endl;
+	// 	return 1;
 	// }
 	
 	return 0;
@@ -113,4 +146,11 @@ Time to process a range of 3000 elements with std::[..] : 69.27212 us
 
 $>./PmergeMe "-1" "2"
 Error
+
+*/
+
+/*
+
+review-ref: https://oeis.org/A001768
+
 */

@@ -27,8 +27,15 @@ RPN::RPN(const RPN &other) {
 }
 
 RPN &RPN::operator=(const RPN &other) {
-	this->_stack = other._stack;
+	if (this != &other) {
+		RPN tmp(other);
+		tmp.swap(*this);
+	}
 	return *this;
+}
+
+void RPN::swap(RPN &other) {
+	std::swap(this->_stack, other._stack);
 }
 
 bool RPN::hasEnoughOperands() const {

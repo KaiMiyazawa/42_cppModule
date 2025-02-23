@@ -1,6 +1,5 @@
 #include "PmergeMe.hpp"
-
-// template <typename T> : std::vector<int> or std::deque<int>
+//#include "Integer.hpp"//for-test
 
 static bool is_digit_string(std::string s) {
 	for (std::string::iterator it = s.begin(); it != s.end(); it++) {
@@ -63,7 +62,7 @@ PmergeMe<T>::PmergeMe(std::string sequence) {
 		}
 		int n;
 		std::stringstream(s) >> n;
-		_sequence.push_back(n);
+		_sequence.push_back(typename T::value_type(n));
 	}
 }
 
@@ -78,11 +77,17 @@ PmergeMe<T>::PmergeMe(PmergeMe const &src) {
 template <typename T>
 PmergeMe<T> &PmergeMe<T>::operator=(PmergeMe const &rhs) {
 	if (this != &rhs) {
-		_sequence = rhs._sequence;
-		_time_start = rhs._time_start;
-		_time_elapsed = rhs._time_elapsed;
+		PmergeMe tmp(rhs);
+		tmp.swap(*this);
 	}
 	return *this;
+}
+
+template <typename T>
+void PmergeMe<T>::swap(PmergeMe &other) {
+	_sequence.swap(other._sequence);
+	std::swap(_time_start, other._time_start);
+	std::swap(_time_elapsed, other._time_elapsed);
 }
 
 template <typename T>
@@ -103,6 +108,12 @@ struct PendingPair {
 	int smaller;
 	PendingPair(const int & b, const int & s) : bigger(b), smaller(s) {}
 };
+
+//struct PendingPair { //for-test
+//	Integer bigger;
+//	Integer smaller;
+//	PendingPair(const Integer & b, const Integer & s) : bigger(b), smaller(s) {}
+//};
 
 template <typename T>
 static void binaryInsert(T & S, const typename T::value_type & val) {
@@ -146,7 +157,7 @@ void PmergeMe<T>::sort() {
 	
 	// odd number of elements
 	if (_sequence.size() % 2 == 1) {
-		int odd_extra = _sequence.back();
+		typename T::value_type odd_extra = _sequence.back();
 		_sequence.pop_back();
 		sort();
 		binaryInsert(_sequence, odd_extra);
@@ -158,8 +169,8 @@ void PmergeMe<T>::sort() {
 	std::vector<PendingPair> pendings;
 	
 	// first pair
-	int special_smaller;
-	if (_sequence[0] > _sequence[1]) {
+	typename T::value_type special_smaller = 0;
+	if (_sequence[1] < _sequence[0]) {
 		special_smaller = _sequence[1];
 		biggers.push_back(_sequence[0]);
 	} else {
@@ -168,10 +179,10 @@ void PmergeMe<T>::sort() {
 	}
 	
 	// pair making
-	for (int i = 1; i < n/2; ++i) {
+	for (typename T::size_type i = 1; i < n/2; ++i) {
 		Size idx0 = 2*i;
 		Size idx1 = 2*i + 1;
-		if (_sequence[idx0] > _sequence[idx1]) {
+		if (_sequence[idx1] < _sequence[idx0]) {
 			biggers.push_back(_sequence[idx0]);
 			pendings.push_back(PendingPair(_sequence[idx0], _sequence[idx1]));
 		} else {
@@ -181,7 +192,12 @@ void PmergeMe<T>::sort() {
 	}
 	
 	// recursive sort
-	this->sort();
+	{
+		PmergeMe<T> pm;
+		pm._sequence = biggers;
+		pm.sort();
+		biggers = pm._sequence;
+	}
 	
 	// special insert
 	biggers.insert(biggers.begin(), special_smaller);
@@ -261,3 +277,6 @@ void PmergeMe<T>::benchmark() {
 
 template class PmergeMe<std::vector<int> >;
 template class PmergeMe<std::deque<int> >;
+
+//template class PmergeMe<std::vector<Integer> >;//for-test
+//template class PmergeMe<std::deque<Integer> >;//for-test
