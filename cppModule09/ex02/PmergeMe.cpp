@@ -245,17 +245,17 @@ void PmergeMe<T>::sort() {
 	_time_elapsed = getMicroseconds() - _time_start;
 }
 
-template <>
-void PmergeMe<std::vector<int> >::sort() {
-	std::sort(_sequence.begin(), _sequence.end());
-	_time_elapsed = getMicroseconds() - _time_start;
-}
+//template <>
+//void PmergeMe<std::vector<int> >::sort() {
+//	std::sort(_sequence.begin(), _sequence.end());
+//	_time_elapsed = getMicroseconds() - _time_start;
+//}
 
-template <>
-void PmergeMe<std::deque<int> >::sort() {
-	std::sort(_sequence.begin(), _sequence.end());
-	_time_elapsed = getMicroseconds() - _time_start;
-}
+//template <>
+//void PmergeMe<std::deque<int> >::sort() {
+//	std::sort(_sequence.begin(), _sequence.end());
+//	_time_elapsed = getMicroseconds() - _time_start;
+//}
 
 template <typename T>
 void PmergeMe<T>::benchmark() {
