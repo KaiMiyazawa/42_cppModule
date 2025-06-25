@@ -1,56 +1,191 @@
 # cpp Module 04
-Lesson about Subtype polymorphism, abstract classes, interfaces in C++.
-C++のサブタイプ多態性、抽象クラス、インターフェースについて学びました。
 
-## ex00 Polymorphism
-This is a program about Animal, Dog, and Cat classes.
-動物、犬、猫のクラスについてのプログラムです。
+**製作者**: kmiyazawa
 
-### Usage
-```shell
+## 概要
+このモジュールはC++のサブタイプ多態性、抽象クラス、インターフェースについて学習するためのプロジェクトです。仮想関数、純粋仮想関数、抽象クラス、深いコピー/浅いコピーなどの高度なオブジェクト指向概念を実践的に習得します。
+
+## 学習目標
+- サブタイプ多態性（Subtype Polymorphism）の理解
+- 仮想関数（Virtual Function）の概念と実装
+- 純粋仮想関数（Pure Virtual Function）と抽象クラス
+- 深いコピー（Deep Copy）と浅いコピー（Shallow Copy）の違い
+- インターフェースの設計と実装
+- 動的バインディングの理解
+
+## Exercise 00: Polymorphism
+
+### 概要
+Animal、Dog、Catクラスを実装し、基本的な多態性と仮想関数の概念を学習します。
+
+### 学習内容
+- 基底クラスと派生クラスの設計
+- 仮想関数の基本的な使用
+- ポリモーフィックな動作の実装
+- 仮想デストラクタの重要性
+
+### 使用されるC++機能
+- 仮想関数（`virtual`キーワード）
+- 仮想デストラクタ
+- 動的バインディング
+- アップキャスト
+- ポリモーフィズム
+
+### クラス設計
+#### Animalクラス（基底クラス）
+- **メンバ変数**: `type`（動物の種類）
+- **仮想関数**: `makeSound()`
+- **仮想デストラクタ**: リソースの適切な解放
+
+#### Dogクラス（派生クラス）
+- **継承**: public Animal
+- **オーバーライド**: `makeSound()` - "Woof!"
+
+#### Catクラス（派生クラス）
+- **継承**: public Animal
+- **オーバーライド**: `makeSound()` - "Meow!"
+
+### WrongAnimal/WrongCatクラス
+比較のために、`virtual`キーワードを使用しない実装も含まれています。
+
+### コンパイル・実行方法
+```bash
+cd ex00
 make
-./zoo
+./polymorphism
 ```
 
-### What I learned
-I learned about Subtype polymorphism in C++.
-C++のサブタイプ多態性について学びました。
+### 重要なポイント
+- **仮想関数**: 動的バインディングによる適切なメソッド呼び出し
+- **仮想デストラクタ**: 派生クラスのデストラクタが確実に呼ばれる
+- **ポリモーフィズム**: 基底クラスのポインタで派生クラスのメソッド実行
+- **Wrong実装**: 非仮想関数での問題点の理解
 
-## ex01 I don't want to set the world on fire
-This is a program about Animal, Dog, and Cat classes. (continued)
-They have a Brain.
-動物、犬、猫のクラスについてのプログラムです。(続き)
-脳を持っています。
+## Exercise 01: I don't want to set the world on fire
 
-### Usage
-```shell
+### 概要
+Brainクラスを追加し、深いコピーと浅いコピーの概念を実践的に学習します。
+
+### 学習内容
+- 深いコピー（Deep Copy）の実装
+- 浅いコピー（Shallow Copy）の問題点
+- 動的メモリ割り当てとコピー処理
+- コピーコンストラクタと代入演算子の適切な実装
+
+### 使用されるC++機能
+- 動的メモリ割り当て（`new`/`delete`）
+- コピーコンストラクタ
+- 代入演算子のオーバーロード
+- 深いコピーの実装
+
+### クラス設計
+#### Brainクラス
+- **メンバ変数**: `ideas[100]`（アイデアの配列）
+- **機能**: 動物の思考を表現
+
+#### Animal、Dog、Catクラス（拡張版）
+- **メンバ変数**: `Brain* brain`（動的に割り当て）
+- **コンストラクタ**: Brainオブジェクトの動的生成
+- **デストラクタ**: Brainオブジェクトの適切な削除
+- **コピー機能**: 深いコピーの実装
+
+### コンパイル・実行方法
+```bash
+cd ex01
 make
-./zoo
+./brain
 ```
 
-### What I learned
-I learned about deep copy and shallow copy in C++.
-C++のディープコピーとシャローコピーについて学びました。
+### 重要なポイント
+- **深いコピー**: ポインタが指すオブジェクトもコピー
+- **浅いコピー**: ポインタのアドレスのみをコピー（危険）
+- **メモリ管理**: 動的メモリの適切な割り当てと解放
+- **コピー時の安全性**: ダングリングポインタの回避
 
-## ex02 Abstract classes
-This is a program about Dog, and Cat classes. (continued)
-They have a Brain. (continued)
-There is no Animal. There is only Dog and Cat.
-犬、猫のクラスについてのプログラムです。(続き)
-脳を持っています。(続き)
-動物はありません。犬と猫だけです。
+### 実装される機能
+- 動物オブジェクトの配列作成とテスト
+- コピーコンストラクタの動作確認
+- メモリリークの防止確認
 
-### Usage
-```shell
-make
-./zoo
+## Exercise 02: Abstract classes
+
+### 概要
+抽象クラス（AAnimal）を実装し、純粋仮想関数とインターフェースの概念を学習します。
+
+### 学習内容
+- 純粋仮想関数（Pure Virtual Function）
+- 抽象クラス（Abstract Class）の設計
+- インスタンス化不可能なクラス
+- インターフェースとしての抽象クラス
+
+### 使用されるC++機能
+- 純粋仮想関数（`= 0`）
+- 抽象クラス
+- インターフェース設計
+- 強制的なオーバーライド
+
+### クラス設計
+#### AAanimalクラス（抽象クラス）
+```cpp
+class AAnimal {
+public:
+    virtual ~AAnimal() {}
+    virtual void makeSound() const = 0;  // 純粋仮想関数
+protected:
+    std::string type;
+};
 ```
 
-### What I learned
-I learned about abstract classes in C++.
-I used pure virtual function to create an abstract class.
-C++の抽象クラスについて学びました.
-純粋仮想関数を使って、抽象クラスを作成しました。
+#### Dog、Catクラス（具象クラス）
+- **継承**: public AAnimal
+- **必須実装**: `makeSound()`（純粋仮想関数のオーバーライド）
+- **Brainオブジェクト**: 動的メモリ管理
 
-That's all.
-以上です。
+### コンパイル・実行方法
+```bash
+cd ex02
+make
+./abstract
+```
+
+### 重要なポイント
+- **純粋仮想関数**: `virtual 関数名() = 0;`の構文
+- **抽象クラス**: 純粋仮想関数を持つクラス
+- **インスタンス化**: 抽象クラスは直接インスタンス化不可
+- **強制実装**: 派生クラスでの純粋仮想関数の実装が必須
+
+### 実装の違い
+- `Animal`クラスは存在しない
+- `AAnimal`抽象クラスのみ存在
+- インターフェースとしての役割
+- より厳密な継承階層
+
+## 全体の学習成果
+このモジュールを通じて以下の重要な概念を習得しました：
+
+### 多態性の理解
+- 静的バインディング vs 動的バインディング
+- 仮想関数テーブル（vtable）の概念
+- ポリモーフィックな呼び出し
+
+### メモリ管理の高度な概念
+- 深いコピーと浅いコピーの実装
+- 動的メモリ割り当ての安全な管理
+- RAII（Resource Acquisition Is Initialization）の基本
+
+### オブジェクト指向設計
+- 抽象化の概念と実装
+- インターフェースとしての抽象クラス
+- 継承階層の適切な設計
+
+### C++特有の機能
+- 仮想関数の動作メカニズム
+- 純粋仮想関数による強制実装
+- 仮想デストラクタの重要性
+
+## 注意点
+- **仮想デストラクタ**: 継承階層では必ず仮想デストラクタを使用
+- **深いコピー**: 動的メモリを使用する場合は深いコピーを実装
+- **メモリリーク**: `new`で割り当てたメモリは必ず`delete`で解放
+- **純粋仮想関数**: 抽象クラスはインスタンス化できない
+- **オーバーライド**: 派生クラスでの適切な関数オーバーライド

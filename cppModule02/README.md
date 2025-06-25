@@ -1,53 +1,179 @@
 # cpp Module 02
-Lesson about Ad-hoc polymorphism, operator overloading and Orthodox Canonical Class Form.
-関数オーバーロード、演算子オーバーロード、正統派クラスフォームについて学びました。
 
-## ex00 My First Class in Orthdox Canonical Form
-This is a program that creates a fixed-point number class.
-固定小数点数クラスを作成するプログラムです。
+**製作者**: kmiyazawa
 
-### Usage
-```shell
+## 概要
+このモジュールはC++のアドホック多態性、演算子オーバーロード、正統派標準クラス形式（Orthodox Canonical Class Form）について学習するためのプロジェクトです。固定小数点数クラスを実装しながら、これらの重要な概念を実践的に習得します。
+
+## 学習目標
+- 正統派標準クラス形式の理解と実装
+- 演算子オーバーロードの概念と実装方法
+- コピーコンストラクタと代入演算子の適切な実装
+- 浮動小数点数と固定小数点数の違い
+- const正確性の理解
+- 前置・後置インクリメント/デクリメント演算子の実装
+
+## Exercise 00: My First Class in Orthodox Canonical Form
+
+### 概要
+正統派標準クラス形式に従った固定小数点数クラスの基本実装を行います。
+
+### 学習内容
+- 正統派標準クラス形式（Big Four）の実装
+- デフォルトコンストラクタ
+- コピーコンストラクタ
+- 代入演算子
+- デストラクタ
+
+### 使用されるC++機能
+- クラス定義
+- コンストラクタ（デフォルト、コピー）
+- 代入演算子（`operator=`）
+- デストラクタ
+- ビット操作（左シフト、右シフト）
+
+### コンパイル・実行方法
+```bash
+cd ex00
 make
-./Fixed
+./fixed
 ```
 
-### What I learned
-I learned about the Orthodox Canonical Class Form.
-正統派クラスフォームについて学びました。
+### 重要なポイント
+- **デフォルトコンストラクタ**: 固定小数点値を0で初期化
+- **コピーコンストラクタ**: 深いコピーの実装
+- **代入演算子**: 自己代入チェックとリターン値
+- **デストラクタ**: リソースの適切な解放
+- **const正確性**: const メンバ関数の適切な使用
 
-## ex01 Towards a more useful fixed-point number class
-This is a program that creates a fixed-point number class. (continued)
-固定小数点数クラスを作成するプログラムです。(続き)
+### 固定小数点数について
+- 8ビットの小数部を使用（256分の1の精度）
+- 整数部と小数部を一つの整数で表現
+- 浮動小数点数よりもメモリ効率が良い
 
-### Usage
-```shell
+## Exercise 01: Towards a more useful fixed-point number class
+
+### 概要
+固定小数点数クラスにより実用的な機能を追加し、演算子オーバーロードを学習します。
+
+### 学習内容
+- パラメータ化コンストラクタの追加
+- int型とfloat型からの変換
+- 出力ストリーム演算子のオーバーロード
+- const関数の適切な使用
+
+### 使用されるC++機能
+- 出力ストリーム演算子（`operator<<`）
+- 型変換コンストラクタ
+- float型とint型の相互変換
+- friend関数
+- const メンバ関数
+
+### コンパイル・実行方法
+```bash
+cd ex01
 make
-./Fixed
+./fixed
 ```
 
-### What I learned
-I learned about `<<` operator overloading.
-`<<`演算子のオーバーロードについて学びました。
+### 重要なポイント
+- **int型コンストラクタ**: 整数をビットシフトで固定小数点形式に変換
+- **float型コンストラクタ**: 浮動小数点数を固定小数点形式に変換
+- **toInt()関数**: 固定小数点数を整数に変換
+- **toFloat()関数**: 固定小数点数を浮動小数点数に変換
+- **出力演算子**: 分かりやすい形式での値の表示
 
-## ex02 Now we're talking
-This is a program that creates a fixed-point number class. (continued)
-固定小数点数クラスを作成するプログラムです。(続き)
+## Exercise 02: Now we're talking
 
-### Usage
-```shell
+### 概要
+完全な演算子オーバーロードを実装し、固定小数点数クラスを完成させます。
+
+### 学習内容
+- 比較演算子のオーバーロード
+- 算術演算子のオーバーロード
+- インクリメント/デクリメント演算子のオーバーロード
+- static メンバ関数の実装
+
+### 使用されるC++機能
+- 比較演算子（`>`, `<`, `>=`, `<=`, `==`, `!=`）
+- 算術演算子（`+`, `-`, `*`, `/`）
+- インクリメント/デクリメント演算子（`++`, `--`）
+- static メンバ関数
+- const 正確性
+
+### コンパイル・実行方法
+```bash
+cd ex02
 make
-./Fixed
+./fixed
 ```
 
-### What I learned
-I learned about `>, <, >=, <=, ==, !=` and `+,-,*,/` operator overloading.
-`>, <, >=, <=, ==, !=`と`+,-,*,/`演算子のオーバーロードについて学びました。
-I learned about increment and decrement operator overloading.
+### 実装される機能
+#### 比較演算子
+- `operator>`, `operator<`, `operator>=`, `operator<=`
+- `operator==`, `operator!=`
 
-## ex03 BSP
-I haven't done it yet, so nothing.
-まだやってないのでなしです。
+#### 算術演算子
+- `operator+`, `operator-`, `operator*`, `operator/`
 
-That's all.
-以上です。
+#### インクリメント/デクリメント演算子
+- 前置インクリメント（`++a`）
+- 後置インクリメント（`a++`）
+- 前置デクリメント（`--a`）
+- 後置デクリメント（`a--`）
+
+#### static メンバ関数
+- `min()`: 2つの値の最小値を返す
+- `max()`: 2つの値の最大値を返す
+
+### 重要なポイント
+- **前置と後置の違い**: 戻り値の型と実装方法
+- **const オーバーロード**: const版とnon-const版の提供
+- **算術演算の精度**: ビット操作による正確な計算
+- **static関数**: オブジェクトなしで呼び出し可能
+
+## Exercise 03: BSP (Binary Space Partitioning)
+
+### 概要
+2D空間における点が三角形の内部にあるかどうかを判定するプログラムを実装します。
+
+### 学習内容
+- 幾何学的アルゴリズムの実装
+- 固定小数点数の実践的な活用
+- 複雑な数学的計算の実装
+
+### 実装状況
+このエクササイズは現在未実装です。以下の機能を実装する必要があります：
+- Pointクラスの実装
+- BSP（Binary Space Partitioning）アルゴリズム
+- 点と三角形の位置関係の判定
+
+### 重要なポイント
+- ベクトルの外積を使用した判定
+- 固定小数点演算の精度考慮
+- 境界ケースの適切な処理
+
+## 全体の学習成果
+このモジュールを通じて以下の重要な概念を習得しました：
+
+### 正統派標準クラス形式
+- Big Four（コンストラクタ、コピーコンストラクタ、代入演算子、デストラクタ）
+- 適切なリソース管理
+- 自己代入の処理
+
+### 演算子オーバーロード
+- 様々な演算子の適切な実装方法
+- const正確性の維持
+- 戻り値の型の選択
+
+### 数値システム
+- 固定小数点数の概念と実装
+- 浮動小数点数との違い
+- ビット操作による効率的な実装
+
+## 注意点
+- **const正確性**: const メンバ関数の適切な使用
+- **自己代入**: 代入演算子での自己代入チェック
+- **戻り値の最適化**: 演算子の戻り値型の適切な選択
+- **精度の維持**: 固定小数点演算での精度考慮
+- **例外安全性**: エラーケースでの適切な处理

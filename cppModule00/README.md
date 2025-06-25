@@ -1,65 +1,153 @@
 # cpp Module 00
-About C++ basics.
-C++の基本的な文法について学びます。
 
-## ex00 Megaphone
-This is very simple program. Take a string as an argument and output it in uppercase.
-簡単なプログラムです。文字列を引数として受け取り、大文字で出力します。
+**製作者**: kmiyazawa
 
-### Usage
-First, make. Second, execute.
-まず、makeします。次に、実行します。
-```shell
+## 概要
+このモジュールはC++の基本的な文法について学習するためのプロジェクトです。C++の基本的な構文、クラス、入出力、文字列処理などの基礎的な概念を習得することを目的としています。
+
+## 学習目標
+- C++の基本的な文法の理解
+- 標準入出力の使用方法
+- C++のクラスの基本的な使い方
+- 文字列処理の基本
+- Makefileの作成と使用
+
+## Exercise 00: Megaphone
+
+### 概要
+コマンドライン引数として受け取った文字列を大文字に変換して出力するシンプルなプログラムです。
+
+### 学習内容
+- C++の基本的な文法
+- `std::cout`を使った標準出力
+- `std::string`クラスの使用
+- 文字列の操作（大文字変換）
+- コマンドライン引数の処理
+
+### 使用されるC++機能
+- `#include <iostream>`
+- `#include <string>`
+- `std::cout`
+- `std::toupper()`
+- `argc`と`argv`の処理
+
+### コンパイル・実行方法
+```bash
+cd ex00
 make
 ./megaphone "hello world!"
 ```
 
-### What I learned
-I learned about the basics of C++.
-C++の基本的な文法について学びました。
+### 実行例
+```bash
+./megaphone "hello world!"
+# 出力: HELLO WORLD!
 
-## ex01 My Awesome PhoneBook
-This is a program that uses a C++ class to create a phonebook that stores 8 contacts.
-C++のクラスを使って、8つの連絡先を保存する電話帳を作成するプログラムです。
+./megaphone
+# 出力: * LOUD AND UNBEARABLE FEEDBACK NOISE *
+```
 
-### Usage
-Make and execute.
-makeして実行します。
-```shell
+### 重要なポイント
+- 引数がない場合の適切な処理
+- 文字列の大文字変換の実装
+- C++の基本的な出力方法の理解
+
+## Exercise 01: My Awesome PhoneBook
+
+### 概要
+C++のクラスを使用して、最大8つの連絡先を保存できる電話帳プログラムを作成します。
+
+### 学習内容
+- C++のクラス定義と使用
+- プライベートメンバとパブリックメンバ
+- コンストラクタとデストラクタ
+- メンバ関数の実装
+- 標準入力の処理
+
+### 使用されるC++機能
+- クラス定義 (`class`)
+- プライベートメンバ変数
+- パブリックメンバ関数
+- `std::cin`と`std::getline()`
+- 配列の使用
+- 文字列の操作
+
+### コンパイル・実行方法
+```bash
+cd ex01
 make
 ./phonebook
 ```
-↓result↓
-```
-...
-...
-...
-> (waiting stdin)
-```
 
-Next, you have 3 options.  
-次に、3つのオプションがあります。
-Using the 3 options, you can enjoy editing a phonebook.
-3つのオプションを使って、電話帳を編集することができます。
+### 使用方法
+プログラムを実行すると、以下の3つのコマンドが使用できます：
+
 #### ADD
-If you pass "ADD" to STDIN, you can add a contact to the phonebook.
-"ADD"をSTDINに渡すと、電話帳に連絡先を追加できます。
+新しい連絡先を追加します。以下の情報を入力：
+- 名前 (First Name)
+- 姓 (Last Name)
+- ニックネーム (Nickname)
+- 電話番号 (Phone Number)
+- 最深の秘密 (Darkest Secret)
 
 #### SEARCH
-If you pass "SEARCH" to STDIN, you can search a phone number from the phonebook.
-"SEARCH"をSTDINに渡すと、電話帳から電話番号を検索できます。
+保存された連絡先を検索・表示します。
+- 連絡先の一覧を表形式で表示
+- インデックスを入力して詳細を表示
 
 #### EXIT
-If you pass "EXIT" to STDIN, this program will stop.
-"EXIT"をSTDINに渡すと、このプログラムは停止します。
+プログラムを終了します。
 
-### What I learned
-I learned about C++ classes.
-C++のクラスについて学びました。
+### 重要なポイント
+- クラスの適切な設計
+- データの封じ込め（カプセル化）
+- 配列の境界チェック
+- 文字列の表示幅制限（10文字）
+- 入力検証の実装
 
-## ex02 The Job Of Your Dreams
-I haven't done it yet, so nothing.
-まだやってないのでなしです。
+## Exercise 02: The Job Of Your Dreams
 
-That's all.
-以上です。
+### 概要
+Accountクラスのメンバ関数を実装する課題です。静的メンバ変数と静的メンバ関数の理解を深めます。
+
+### 学習内容
+- 静的メンバ変数 (`static`)
+- 静的メンバ関数
+- クラスの初期化
+- タイムスタンプの処理
+
+### 使用されるC++機能
+- `static`キーワード
+- 静的メンバ変数
+- 静的メンバ関数
+- `std::time`関数
+- ログ出力の実装
+
+### 実装状況
+このエクササイズは未実装の状態です。以下の機能を実装する必要があります：
+- コンストラクタ・デストラクタ
+- `displayAccountsInfos()`
+- `makeDeposit()`
+- `makeWithdrawal()`
+- `displayStatus()`
+
+### 重要なポイント
+- 静的メンバの理解
+- タイムスタンプの適切な実装
+- ログ出力の形式
+- 例外処理の実装
+
+## 全体の学習成果
+このモジュールを通じて以下のことを学習しました：
+1. C++の基本的な文法と構造
+2. クラスの定義と使用方法
+3. メンバ変数とメンバ関数の概念
+4. 標準入出力の使用方法
+5. 文字列処理の基本
+6. Makefileの作成と使用
+
+## 注意点
+- C++98標準に準拠した実装を心がける
+- メモリリークの防止
+- 適切なエラーハンドリング
+- コードの可読性と保守性を重視

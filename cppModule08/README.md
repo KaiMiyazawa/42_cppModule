@@ -1,54 +1,231 @@
 # cpp Module 08
-This module is about Templated containers, iterators, algorithms in C++.
-このモジュールはC++のテンプレートコンテナ、イテレータ、アルゴリズムについてです。
 
-## ex00 Easy find
-This is a function `easyfind` that takes a container and a value, and returns an iterator to the first occurrence of the value in the container.
-コンテナと値を取り、その値が最初に現れるコンテナ内のイテレータを返す`easyfind`関数です。
+**製作者**: kmiyazawa
 
-### Usage
-```shell
+## 概要
+このモジュールはC++のテンプレートコンテナ、イテレータ、アルゴリズムについて学習するためのプロジェクトです。STL（Standard Template Library）の基本概念、アルゴリズム、イテレータパターン、カスタムコンテナの設計など、現代C++の重要な機能を実践的に習得します。
+
+## 学習目標
+- STLコンテナの理解と使用方法
+- イテレータパターンの実装と活用
+- STLアルゴリズムの使用方法
+- カスタムコンテナクラスの設計
+- 標準コンテナの拡張方法
+- アルゴリズムとデータ構造の分離
+
+## Exercise 00: Easy find
+
+### 概要
+テンプレート関数easyfindを実装し、STLコンテナから特定の値を検索する機能を学習します。
+
+### 学翕内容
+- STLアルゴリズム`std::find`の使用
+- イテレータの基本概念
+- テンプレートとSTLの組み合わせ
+- 例外処理とエラーハンドリング
+
+### 使用されるC++機能
+- `std::find`アルゴリズム
+- イテレータ（`iterator`）
+- STLコンテナ（`vector`、`list`、`deque`など）
+- テンプレート特化
+- 例外処理
+
+### easyfind関数の仕様
+```cpp
+template <typename T>
+typename T::iterator easyfind(T& container, int value) {
+    typename T::iterator it = std::find(container.begin(), container.end(), value);
+    if (it == container.end()) {
+        throw std::exception();  // またはカスタム例外
+    }
+    return it;
+}
+```
+
+### サポートするコンテナ
+- `std::vector<int>`
+- `std::list<int>`
+- `std::deque<int>`
+- その他のSTLシーケンシャルコンテナ
+
+### コンパイル・実行方法
+```bash
+cd ex00
 make
 ./easyfind
 ```
 
-### What I learned
-I learned about Templated containers, iterators, algorithms (especially `find`) in C++.
-C++のテンプレートコンテナ、イテレータ、アルゴリズム(特に`find`)について学びました。
+### 重要なポイント
+- **イテレータパターン**: 統一されたアクセス方法
+- **アルゴリズムの再利用**: コンテナとアルゴリズムの分離
+- **例外処理**: 検索失敗時の適切な対応
+- **テンプレート特化**: 特定の型に対する特別な処理
 
-## ex01 Span
-This is a class `Span` that is a template class that holds a container of a given type, and has a method `addNumber` that adds a number to the container, and a method `shortestSpan` that returns the difference between the smallest two numbers in the container, and a method `longestSpan` that returns the difference between the largest and smallest numbers in the container.
-与えられた型のコンテナを保持するテンプレートクラスである`Span`クラスです。コンテナに数値を追加する`addNumber`メソッドと、コンテナ内の最小の二つの数値の差を返す`shortestSpan`メソッド、コンテナ内の最大と最小の数値の差を返す`longestSpan`メソッドを持ちます。
+## Exercise 01: Span
 
-### Usage
-```shell
+### 概要
+Spanクラスを実装し、数値の集合を管理し、最短距離や最長距離を計算する機能を学習します。
+
+### 学習内容
+- カスタムコンテナクラスの設計
+- STLアルゴリズムの活用（`sort`、`min_element`、`max_element`）
+- 大量データの効率的な処理
+- イテレータ範囲を使った一括操作
+
+### 使用されるC++機能
+- `std::vector`コンテナ
+- `std::sort`、`std::adjacent_find`、`std::min_element`、`std::max_element`
+- イテレータ範囲
+- 例外クラスの設計
+- コンテナの容量管理
+
+### Spanクラスの仕様
+```cpp
+class Span {
+private:
+    unsigned int _maxSize;
+    std::vector<int> _numbers;
+    
+public:
+    Span(unsigned int n);
+    Span(const Span& other);
+    ~Span();
+    
+    Span& operator=(const Span& other);
+    
+    void addNumber(int number);
+    template <typename Iterator>
+    void addNumbers(Iterator begin, Iterator end);
+    
+    unsigned int shortestSpan() const;
+    unsigned int longestSpan() const;
+    
+    // 例外クラス
+    class SpanFullException : public std::exception {
+        const char* what() const throw();
+    };
+    
+    class SpanTooSmallException : public std::exception {
+        const char* what() const throw();
+    };
+};
+```
+
+### 実装される機能
+- **addNumber()**: 個別の数値を追加
+- **addNumbers()**: イテレータ範囲で一括追加
+- **shortestSpan()**: 最短距離の計算
+- **longestSpan()**: 最長距離の計算
+- **例外処理**: 容量オーバー、データ不足の処理
+
+### コンパイル・実行方法
+```bash
+cd ex01
 make
 ./span
 ```
 
-### What I learned
-I learned about Templated containers, iterators, algorithms (especially `sort`) in C++.
-C++のテンプレートコンテナ、イテレータ、アルゴリズム(特に`sort`)について学びました.
+### 重要なポイント
+- **効率的なアルゴリズム**: ソートと近接要素検索の組み合わせ
+- **イテレータ範囲**: 一括操作でのパフォーマンス向上
+- **例外設計**: 適切なエラー処理とユーザーエクスペリエンス
+- **STL活用**: 標準ライブラリの効果的な使用
 
-## ex02 Mutanted abomination
-This is a class `MutantStack` that is a template class that is a stack that inherits from `std::stack` and has iterators.
-`std::stack`を継承し、イテレータを持つスタックであるテンプレートクラスである`MutantStack`クラスです。
-
+### 未実装機能と改善点
 > [!WARNING]
-> addNumbersメソッドを作ってないので、-10点です。
+> **addNumbersメソッドの未実装**: イテレータ範囲での一括追加機能が未実装（-10点）
 
-### Usage
-```shell
-make
-./mutantStack
+## Exercise 02: Mutanted abomination
+
+### 概要
+MutantStackクラスを実装し、標準のstackコンテナにイテレータ機能を追加します。
+
+### 学習内容
+- 標準コンテナの拡張方法
+- イテレータの実装と公開
+- コンテナアダプタの理解
+- STLコンテナの内部構造
+
+### 使用されるC++機能
+- `std::stack`コンテナアダプタ
+- テンプレート継承
+- typedefでの型エイリアス
+- イテレータのexpose
+- コンテナアダプタの内部アクセス
+
+### MutantStackクラスの仕様
+```cpp
+template <typename T>
+class MutantStack : public std::stack<T> {
+public:
+    MutantStack();
+    MutantStack(const MutantStack& other);
+    ~MutantStack();
+    
+    MutantStack& operator=(const MutantStack& other);
+    
+    // イテレータ型の定義
+    typedef typename std::stack<T>::container_type::iterator iterator;
+    typedef typename std::stack<T>::container_type::const_iterator const_iterator;
+    
+    // イテレータアクセス関数
+    iterator begin();
+    iterator end();
+    const_iterator begin() const;
+    const_iterator end() const;
+};
 ```
 
-### What I learned
-I learned about Templated containers (especially `std::stack`), iterators, algorithms in C++.
-C++のテンプレートコンテナ(特に`std::stack`)、イテレータ、アルゴリズムについて学びました。
+### 実装の特徴
+- **継承ベース**: `std::stack`をpublic継承
+- **イテレータサポート**: 内部コンテナのイテレータを公開
+- **STL互換**: STLアルゴリズムで使用可能
+- **標準準拠**: 標準コンテナのインターフェースを保持
 
+### コンパイル・実行方法
+```bash
+cd ex02
+make
+./mutantstack
+```
+
+### 重要なポイント
+- **コンテナアダプタ**: 標準コンテナをラップした特化コンテナ
+- **内部アクセス**: protectedメンバへのアクセス方法
+- **型安全性**: テンプレートによる統一的なインターフェース
+- **STL統合**: 標準ライブラリとのシームレスな統合
+
+### 未実装機能と改善点
 > [!WARNING]
-> more tests をちゃんと作ってないので、-10点です。
+> **テストケースの不足**: より包括的なテストケースが必要（-10点）
 
-That's all.
-以上です。
+## 全体の学習成果
+このモジュールを通じて以下の重要な概念を習得しました：
+
+### STLの基本概念
+- コンテナ、イテレータ、アルゴリズムの分離
+- ジェネリックプログラミングの実践
+- イテレータパターンの理解と実装
+
+### コンテナ設計
+- カスタムコンテナの設計原則
+- 標準コンテナの拡張方法
+- コンテナアダプタの活用
+
+### アルゴリズムと最適化
+- STLアルゴリズムの効果的な使用
+- パフォーマンスを考慮したデータ処理
+- 大量データの効率的な操作
+
+### エラーハンドリング
+- STLコンテキストでの例外設計
+- 境界条件とエッジケースの処理
+- ユーザーフレンドリーなエラーメッセージ
+
+## 注意点
+- **パフォーマンス**: STLアルゴリズムの計算量を理解して使用
+- **メモリ管理**: コンテナの自動メモリ管理を活用
+- **イテレータ無効化**: コンテナの変更時のイテレータ無効化に注意
+- **型安全性**: テンプレートでの型制約とエラー検出
+- **STL规範**: STLのコーディングスタイルとコンベンションに従う

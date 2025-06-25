@@ -1,57 +1,201 @@
 # cpp Module 03
-Lesson about inheritance in C++.
-C++の継承について学びました。
 
-## ex00 Aaaaand... OPEN!
-This is a program about a class "ClapTrap".
-クラス"ClapTrap"についてのプログラムです。
-You can set attack damage, hit points, and energy points.
-攻撃力、体力、エネルギーポイントを設定できます。
+**製作者**: kmiyazawa
 
-### Usage
-```shell
+## 概要
+このモジュールはC++の継承（Inheritance）について学習するためのプロジェクトです。基底クラスから派生クラスを作成し、継承の概念、アクセス指定子、仮想関数、多重継承などの重要な概念を実践的に学習します。
+
+## 学習目標
+- 継承の基本概念と実装方法
+- アクセス指定子（public, protected, private）の理解
+- 基底クラスと派生クラスの関係
+- コンストラクタ・デストラクタの継承における動作
+- 仮想関数の概念と使用方法
+- 多重継承とその問題点
+
+## Exercise 00: Aaaaand... OPEN!
+
+### 概要
+基底クラス「ClapTrap」を実装し、継承の基礎となるクラス設計を学習します。
+
+### 学習内容
+- 基本的なクラス設計
+- メンバ変数とメンバ関数
+- コンストラクタとデストラクタ
+- カプセル化の実践
+
+### 使用されるC++機能
+- クラス定義
+- コンストラクタ（デフォルト、パラメータ付き）
+- デストラクタ
+- パブリックメンバ関数
+- プライベートメンバ変数
+
+### ClapTrapクラスの仕様
+- **属性**:
+  - Name: ClapTrapの名前
+  - Hit points: 10（体力）
+  - Energy points: 10（エネルギー）
+  - Attack damage: 0（攻撃力）
+
+- **メンバ関数**:
+  - `attack()`: 敵を攻撃する
+  - `takeDamage()`: ダメージを受ける
+  - `beRepaired()`: 体力を回復する
+
+### コンパイル・実行方法
+```bash
+cd ex00
 make
-./clap_trap
+./claptrap
 ```
 
-### What I learned
-I learned about inheritance in C++.
-C++の継承について学びました.
+### 重要なポイント
+- 各アクションはエネルギーポイントを1消費
+- 体力またはエネルギーが0以下の場合は行動不可
+- 適切なメッセージ出力の実装
+- リソース管理の基本概念
 
-## ex01 Serena, my love!
-This is a program about a class "ScavTrap" that inherits from "ClapTrap".
-クラス"ClapTrap"を継承したクラス"ScavTrap"についてのプログラムです。
-You can't set attack damage, hit points, and energy points.
-攻撃力、体力、エネルギーポイントを設定できません。
+## Exercise 01: Serena, my love!
 
-### Usage
-```shell
+### 概要
+ClapTrapクラスを継承してScavTrapクラスを実装し、継承の基本を学習します。
+
+### 学習内容
+- public継承の実装
+- 派生クラスでの属性値のオーバーライド
+- 基底クラスのコンストラクタ呼び出し
+- 派生クラス固有の機能追加
+
+### 使用されるC++機能
+- `class ScavTrap : public ClapTrap`（public継承）
+- 基底クラスコンストラクタの呼び出し
+- メンバ関数のオーバーライド
+- 派生クラス固有のメンバ関数
+
+### ScavTrapクラスの仕様
+- **継承元**: ClapTrap
+- **属性** (オーバーライド):
+  - Hit points: 100
+  - Energy points: 50
+  - Attack damage: 20
+
+- **追加機能**:
+  - `guardGate()`: Gate keeper modeの実装
+
+### コンパイル・実行方法
+```bash
+cd ex01
 make
-./clap_trap
+./scavtrap
 ```
 
-### What I learned
-I learned about inheritance in C++.
-C++の継承について学びました.
+### 重要なポイント
+- **継承の構文**: `class Derived : public Base`
+- **コンストラクタチェーン**: 基底クラスのコンストラクタが先に実行
+- **デストラクタチェーン**: 派生クラスのデストラクタが先に実行
+- **属性の初期化**: 派生クラスでの属性値設定
 
-## ex02 Repetitive work
-This is a program about a class "FragTrap" that inherits from "ClapTrap".
-クラス"ClapTrap"を継承したクラス"FragTrap"についてのプログラムです。
-You can't set attack damage, hit points, and energy points.
-攻撃力、体力、エネルギーポイントを設定できません。
+## Exercise 02: Repetitive work
 
-### Usage
-```shell
-./clap_trap
+### 概要
+ClapTrapクラスからFragTrapクラスを実装し、複数の派生クラスの管理を学習します。
+
+### 学習内容
+- 複数の派生クラスの実装
+- 各派生クラスの特性の定義
+- 基底クラスとの共通性と差異の理解
+
+### 使用されるC++機能
+- 複数の派生クラス
+- 各クラス固有のメンバ関数
+- コンストラクタ・デストラクタの適切な実装
+
+### FragTrapクラスの仕様
+- **継承元**: ClapTrap
+- **属性** (オーバーライド):
+  - Hit points: 100
+  - Energy points: 100
+  - Attack damage: 30
+
+- **追加機能**:
+  - `highFivesGuys()`: High five requestの実装
+
+### コンパイル・実行方法
+```bash
+cd ex02
+make
+./fragtrap
 ```
 
-### What I learned
-I learned about inheritance in C++.
-C++の継承について学びました.
+### 実装される内容
+- ClapTrap（基底クラス）
+- ScavTrap（派生クラス1）
+- FragTrap（派生クラス2）
 
-## ex03 Now, it's weird!
-I haven't done it yet, so nothing.
-まだやってないのでなしです。
+### 重要なポイント
+- **クラス階層**: 基底クラスから複数の派生クラス
+- **固有機能**: 各派生クラスの独自メンバ関数
+- **属性の差異**: 派生クラスごとの異なる初期値
+- **ポリモーフィズムの準備**: 継承構造の理解
 
-That's all.
-以上です。
+## Exercise 03: Now, it's weird! (Diamond Trap)
+
+### 概要
+DiamondTrapクラスを実装し、多重継承とダイヤモンド問題について学習します。
+
+### 学習内容
+- 多重継承の実装
+- 仮想継承（virtual inheritance）
+- ダイヤモンド問題とその解決方法
+- 複雑な継承階層の管理
+
+### 実装状況
+このエクササイズは現在未実装です。以下の機能を実装する必要があります：
+
+### DiamondTrapクラスの仕様
+- **継承**: ScavTrapとFragTrapの両方から継承
+- **ダイヤモンド問題**: ClapTrapが共通の基底クラス
+- **仮想継承**: `virtual`キーワードの使用
+- **属性の組み合わせ**: 各派生クラスから特定属性を継承
+
+### 実装予定内容
+```cpp
+class DiamondTrap : public ScavTrap, public FragTrap
+{
+    // 多重継承の実装
+    // 仮想継承の使用
+    // whoAmI()関数の実装
+};
+```
+
+### 重要なポイント
+- **多重継承**: 複数のクラスからの継承
+- **ダイヤモンド問題**: 共通基底クラスの重複問題
+- **仮想継承**: `virtual`キーワードによる解決
+- **名前の曖昧性**: スコープ解決演算子の使用
+
+## 全体の学習成果
+このモジュールを通じて以下の重要な概念を習得しました：
+
+### 継承の基本
+- 基底クラスと派生クラスの関係
+- public, protected, private継承の違い
+- コンストラクタ・デストラクタの実行順序
+
+### オブジェクト指向設計
+- IS-A関係の実装
+- コードの再利用性
+- クラス階層の設計
+
+### 高度な継承概念
+- 多重継承の問題点
+- 仮想継承による解決策
+- ダイヤモンド問題の理解
+
+## 注意点
+- **コンストラクタ順序**: 基底→派生の順で実行
+- **デストラクタ順序**: 派生→基底の順で実行
+- **アクセス制御**: protected メンバの適切な使用
+- **多重継承**: 複雑性を避けるための慎重な設計
+- **仮想継承**: パフォーマンスへの影響を考慮

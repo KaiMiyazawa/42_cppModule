@@ -1,48 +1,208 @@
 # cpp Module 07
-This module is about templates in C++.
-このモジュールはC++のテンプレートについてです。
 
-## ex00 Start with a few functions
-This is functions that swaps, returns the minimum, and returns the maximum of two values(int, char, double, etc.).
-二つの値(int, char, double, etc.)を入れ替え、最小値を返し、最大値を返す関数です。
+**製作者**: kmiyazawa
 
-### Usage
-```shell
+## 概要
+このモジュールはC++のテンプレート（Template）について学習するためのプロジェクトです。関数テンプレート、クラステンプレート、テンプレートの特化、STLコンテナの基础など、ジェネリックプログラミングの重要な概念を実践的に習得します。
+
+## 学習目標
+- テンプレートの基本概念と構文
+- 関数テンプレートの実装と使用
+- クラステンプレートの設計と実装
+- ジェネリックプログラミングの利点
+- テンプレートのインスタンシエーション
+- コンパイル時多態性の理解
+
+## Exercise 00: Start with a few functions
+
+### 概要
+基本的な関数テンプレートを実装し、テンプレートの基础概念を学習します。
+
+### 学習内容
+- 関数テンプレートの基本構文
+- テンプレートパラメータの使用
+- 型推論（Type Deduction）
+- コンパイル時コード生成
+
+### 使用されるC++機能
+- 関数テンプレート（`template <typename T>`）
+- テンプレートの特化
+- typenameキーワード
+- インライン関数
+
+### 実装する関数テンプレート
+#### swap関数
+```cpp
+template <typename T>
+void swap(T& a, T& b) {
+    T temp = a;
+    a = b;
+    b = temp;
+}
+```
+
+#### min関数
+```cpp
+template <typename T>
+const T& min(const T& a, const T& b) {
+    return (a < b) ? a : b;
+}
+```
+
+#### max関数
+```cpp
+template <typename T>
+const T& max(const T& a, const T& b) {
+    return (a > b) ? a : b;
+}
+```
+
+### コンパイル・実行方法
+```bash
+cd ex00
 make
 ./whatever
 ```
 
-### What I learned
-I learned about templates in C++.
-C++のテンプレートについて学びました.
+### 重要なポイント
+- **テンプレート構文**: `template <typename T>`の使用
+- **型推論**: コンパイラが自動的に型を推論
+- **コンパイル時生成**: 各型に対して個別の関数が生成
+- **パフォーマンス**: 実行時のオーバーヘッドなし
 
-## ex01 Iter
-This is a function `iter` that takes an array and its length, and a function pointer that takes a reference to an element of the array and returns void.
-配列とその長さ、配列の要素への参照を取り、voidを返す関数ポインタを取る`iter`関数です。
+## Exercise 01: Iter
 
-### Usage
-```shell
+### 概要
+関数テンプレートを使用して、配列の各要素に関数を適用するiter関数を実装します。
+
+### 学習内容
+- 関数テンプレートの応用
+- 関数ポインタとテンプレートの組み合わせ
+- 配列操作のジェネリック化
+- 高階関数の概念
+
+### 使用されるC++機能
+- 関数テンプレート
+- 関数ポインタ
+- テンプレートパラメータの組み合わせ
+- 型推論
+
+### iter関数の仕様
+```cpp
+template <typename T, typename F>
+void iter(T* array, size_t length, F func) {
+    for (size_t i = 0; i < length; i++) {
+        func(array[i]);
+    }
+}
+```
+
+### 実装の特徴
+- **ジェネリック配列**: 任意の型の配列に対応
+- **関数オブジェクト**: 関数ポインタ、ラムダ式などに対応
+- **型安全性**: コンパイル時に型チェック
+- **再利用性**: 様々な型と関数で使用可能
+
+### コンパイル・実行方法
+```bash
+cd ex01
 make
 ./iter
 ```
 
-### What I learned
-I learned about templates in C++.
-C++のテンプレートについて学びました.
+### 重要なポイント
+- **高階関数**: 関数を引数として受け取る関数
+- **柔軟性**: 様々な型と操作に対応
+- **STL風**: STLのアルゴリズムに似たインターフェース
+- **コードの再利用**: 同じロジックを異なる型で使用
 
-## ex02 Array
-This is a class `Array` that is a template class that holds an array of a given type.
-与えられた型の配列を保持するテンプレートクラスである`Array`クラスです。
+## Exercise 02: Array
 
-### Usage
-```shell
+### 概要
+クラステンプレートを使用して、型安全で動的サイズを持つArrayクラスを実装します。
+
+### 学習内容
+- クラステンプレートの実装
+- コンテナクラスの設計
+- RAII（Resource Acquisition Is Initialization）の実践
+- 例外安全性の考慮
+- 演算子オーバーロードとテンプレート
+
+### 使用されるC++機能
+- クラステンプレート
+- 動的メモリ管理（`new`/`delete`）
+- 演算子オーバーロード
+- 例外処理
+- 正統派標準クラス形式
+
+### Arrayクラスの仕様
+```cpp
+template <typename T>
+class Array {
+private:
+    T* _elements;
+    unsigned int _size;
+    
+public:
+    Array();                          // デフォルトコンストラクタ
+    Array(unsigned int n);            // サイズ指定コンストラクタ
+    Array(const Array& other);        // コピーコンストラクタ
+    ~Array();                         // デストラクタ
+    
+    Array& operator=(const Array& other);  // 代入演算子
+    T& operator[](unsigned int index);      // 添字演算子
+    const T& operator[](unsigned int index) const;
+    
+    unsigned int size() const;        // サイズ取得
+};
+```
+
+### 実装される機能
+- **動的メモリ管理**: コンストラクタで確保、デストラクタで解放
+- **深いコピー**: 要素を個別にコピー
+- **境界チェック**: 配列アクセス時の範囲チェック
+- **例外処理**: 不正なインデックスでの例外発生
+
+### コンパイル・実行方法
+```bash
+cd ex02
 make
 ./array
 ```
 
-### What I learned
-I learned about templates in C++.
-C++のテンプレートについて学びました.
+### 重要なポイント
+- **RAII原則**: リソースの取得と解放をコンストラクタ/デストラクタで管理
+- **深いコピー**: シャローコピーではなく深いコピーを実装
+- **例外安全性**: 不正な操作に対する適切な例外処理
+- **const正確性**: constメソッドの適切な実装
+- **ジェネリック性**: 任意の型に対応する設計
 
-That's all.
-以上です。
+## 全体の学習成果
+このモジュールを通じて以下の重要な概念を習得しました：
+
+### テンプレートの基本
+- 関数テンプレートとクラステンプレートの違い
+- テンプレートパラメータの使用方法
+- コンパイル時コード生成の仕組み
+
+### ジェネリックプログラミング
+- 型に依存しないコードの記述
+- コードの再利用性と保守性の向上
+- 型安全性を保った柔軟な設計
+
+### STLの理解への基礎
+- コンテナクラスの設計原則
+- アルゴリズムとデータ構造の分離
+- 反復子パターンの基礎
+
+### メモリ管理と例外安全性
+- RAII原則の実践
+- スマートポインタの必要性理解
+- 例外安全なクラス設計
+
+## 注意点
+- **コンパイル時間**: テンプレートの使用はコンパイル時間を増加
+- **コードサイズ**: 最適化が行われないとコードサイズが増大
+- **デバッグ**: テンプレートエラーメッセージは複雑
+- **型制約**: テンプレートパラメータに必要な演算を満たす型のみ使用可能
+- **ヘッダーファイル**: テンプレートは通常ヘッダーファイルに実装

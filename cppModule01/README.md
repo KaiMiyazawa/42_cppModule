@@ -1,136 +1,218 @@
 # cpp Module 01
-Lesson about C++ Memory Allocation, Pointers to members, References.
-C++のメモリ割り当て、メンバへのポインタ、参照についての学びました。
 
-## ex00 BraiiiiiiinnnzzzZ
-This is a program that creates a zombie.
-ゾンビを作成するプログラムです。
-It's about memory allocation in C++.
-C++のメモリ割り当てについてです。
+**製作者**: kmiyazawa
 
-### Usage
-make and execute.
-makeして実行します。
-```shell
+## 概要
+このモジュールはC++のメモリ管理、ポインタ、参照について学習するためのプロジェクトです。動的メモリ割り当て、ポインタと参照の違い、ファイル操作などの重要な概念を実践的に学習します。
+
+## 学習目標
+- 動的メモリ割り当ての理解と実装
+- ポインタと参照の違いとそれぞれの適切な使用場面
+- スタックメモリとヒープメモリの理解
+- ファイル入出力操作
+- 関数ポインタの使用
+- メモリリークの防止
+
+## Exercise 00: BraiiiiiiinnnzzzZ
+
+### 概要
+Zombieクラスを使用して、ヒープとスタックでのオブジェクト作成の違いを学習します。
+
+### 学習内容
+- 動的メモリ割り当て（`new`/`delete`）
+- スタックとヒープの違い  
+- オブジェクトのライフサイクル管理
+- クラスのコンストラクタとデストラクタ
+
+### 使用されるC++機能
+- `new`演算子と`delete`演算子
+- クラス定義とメンバ関数
+- コンストラクタ・デストラクタ
+- ポインタによるメンバアクセス（`->`）
+
+### コンパイル・実行方法
+```bash
+cd ex00
 make
-./Zombie
+./zombie
 ```
 
-### What I learned
-I learned about memory allocation in C++.
-C++のメモリ割り当てについて学びました。
+### 重要なポイント
+- `newZombie()`: ヒープにZombieオブジェクトを作成（手動でdeleteが必要）
+- `randomChump()`: スタックにZombieオブジェクトを作成（自動的に破棄）
+- メモリリークの防止
+- 適切なスコープでのオブジェクト管理
 
-In C++, when you allocate dynamic memory, you use the `new` operator. When you delete it, you use the `delete` operator.
-C++で動的メモリ割り当てを行う時は、`new`演算子。削除する時は、`delete`演算子を使います。
+## Exercise 01: Moar brainz!
 
-When you use member functions of a class, you write `CLASS.METHOD()`.
-When you use member functions of a class pointer, you write `CLASS->METHOD()`.
-クラスのメンバ関数にアクセスするときは`CLASS.METHOD()`と書く。
-クラスのポインタのメンバ関数にアクセスするときは`CLASS->METHOD()`と書く。
+### 概要
+Zombieオブジェクトの配列を動的に作成し、配列のメモリ管理を学習します。
 
+### 学習内容
+- 動的配列の作成（`new[]`/`delete[]`）
+- 配列の初期化とアクセス
+- 複数オブジェクトのメモリ管理
 
-## ex01 Moar brainz!
-This is a program that creates a zombie array.
-ゾンビの配列を作成するプログラムです。
-It's about memory allocation in C++.
-C++のメモリ割り当てについてです。
+### 使用されるC++機能
+- `new[]`演算子と`delete[]`演算子
+- 配列のポインタアクセス
+- ループによる配列の初期化
 
-### Usage
-make and execute.
-makeして実行します。
-```shell
+### コンパイル・実行方法
+```bash
+cd ex01
 make
-./Zombie
+./zombie
 ```
 
-### What I learned
-I learned about memory allocation in C++ (especially arrays).
-C++のメモリ割り当てについて学びました（特に配列）。
+### 重要なポイント
+- `zombieHorde()`: 指定された数のZombieオブジェクト配列を生成
+- 配列全体に対する`delete[]`の使用
+- 各Zombieオブジェクトに名前を設定
+- メモリ効率を考慮した実装
 
-In C++, when you allocate dynamic memory for an array, you use the `new[]` operator. When you delete it, you use the `delete[]` operator.
-C++で配列の動的メモリ割り当てを行う時は、`new[]`演算子。削除する時は、`delete[]`演算子を使います。
+## Exercise 02: HI THIS IS BRAIN
 
-## ex02 HI THIS IS BRAIN
-This is a program about brain.
-脳についてのプログラムです。
-It's about C++ pointers and references.
-C++のポインタと参照についてです。
+### 概要
+ポインタと参照の基本的な使い方と違いを実践的に学習します。
 
-### Usage
-make and execute.
-makeして実行します。
-```shell
+### 学習内容
+- ポインタと参照の宣言と使用
+- メモリアドレスの表示
+- ポインタと参照によるアクセス方法の違い
+
+### 使用されるC++機能
+- ポインタ（`*`）
+- 参照（`&`）
+- アドレス演算子
+- ポインタと参照による値アクセス
+
+### コンパイル・実行方法
+```bash
+cd ex02
 make
-./Brain
+./brain
 ```
 
-### What I learned
-How to use pointers and references in C++.
-C++でポインタと参照を使う方法を学びました。
+### 重要なポイント
+- 文字列のメモリアドレスの表示
+- ポインタによるアクセス（`*stringPTR`）
+- 参照によるアクセス（`stringREF`）
+- ポインタと参照のアドレスが同じことの確認
 
-## ex03 Unnecessary violence
-This is a program about people having waepons.
-武器を持つ人々についてのプログラムです。
-It's about C++ pointers to members.
-C++のメンバへのポインタについてです。
+## Exercise 03: Unnecessary violence
 
-### Usage
-make and execute.
-makeして実行します。
-```shell
+### 概要
+HumanAとHumanBクラスを通じて、ポインタと参照のメンバ変数としての使用方法を学習します。
+
+### 学習内容
+- メンバ変数としてのポインタと参照
+- オブジェクトの関連性の設定
+- ポインタと参照の初期化タイミングの違い
+
+### 使用されるC++機能
+- クラスメンバとしてのポインタ・参照
+- 初期化リスト
+- オブジェクト間の関連付け
+
+### コンパイル・実行方法
+```bash
+cd ex03
 make
-./War
+./violence
 ```
 
-### What I learned
-I learned about pointers and references to members in C++.
-クラスのメンバ変数における、参照とポインタの違いについて学びました。
+### 重要なポイント
+- **HumanA**: 参照としてWeaponを保持（必ず武器を持つ）
+- **HumanB**: ポインタとしてWeaponを保持（武器を持たない場合もある）
+- 参照は初期化時に設定必須、ポインタは後から設定可能
+- 適切な設計パターンの選択
 
-Pointers can be assigned NULL.
-References cannot.
-ポインタはNULLを代入できる。
-参照はできない。
+## Exercise 04: Sed is for losers
 
-Pointers can use NULL to indicate "nothing".
-On the other hand, if "nothing" is not possible, it is desirable to use references.
-ポインタは"ない"ことを示すためにNULLを使える。
-一方、"ない"ことがありえない場合は参照を使うと望ましい。
+### 概要
+ファイルの読み書きと文字列置換を行うプログラムを実装し、ファイル操作を学習します。
 
-## ex04 Sed is for losers
-This is a program about file input/output. It replaces a string in a file.
-ファイルの入出力についてのプログラムです。ファイル内の文字列を置換します。
+### 学習内容
+- ファイルストリームの使用
+- 文字列の検索と置換
+- エラーハンドリング
+- コマンドライン引数の処理
 
-### Usage
-make and execute.
-makeして実行します。
-```shell
+### 使用されるC++機能
+- `std::ifstream`と`std::ofstream`
+- `std::string::find()`
+- `std::string::replace()`
+- ファイルの存在確認
+
+### コンパイル・実行方法
+```bash
+cd ex04
 make
-./replace "filename" "s1" "s2"
+./replace filename s1 s2
 ```
 
-### What I learned
-I learned about file input/output in C++.
-C++でのファイル入出力について学びました。
-Used `std::string::find()`.
-`std::string::find()`を使いました。
+### 重要なポイント
+- ファイルの読み込みと書き込み
+- 文字列内の全ての対象文字列を置換
+- エラーケースの適切な処理
+- 出力ファイル名の生成（filename.replace）
 
-## ex05 Harl 2.0
-This is a program reading stdin. When your input matches a specific string, it outputs a specific string.
-標準入力を読み込むプログラムです。入力が特定の文字列と一致すると、特定の文字列を出力します。
+## Exercise 05: Harl 2.0
 
-### Usage
-make and execute.
-makeして実行します。
-```shell
+### 概要
+関数ポインタを使用してif-else文の連続を避ける効率的なプログラム構造を学習します。
+
+### 学習内容
+- 関数ポインタの使用方法
+- 関数ポインタの配列
+- 効率的な条件分岐の実装
+- メンバ関数ポインタ
+
+### 使用されるC++機能
+- メンバ関数ポインタ
+- 配列によるテーブル駆動設計
+- 文字列比較とループ処理
+
+### コンパイル・実行方法
+```bash
+cd ex05
 make
-./Harl
+./harl
 ```
 
-### What I learned
-I learned about avoiding if-else forest.
-if-elseのネストを避ける方法を学びました。
-I used function references array.
-関数参照の配列を使いました。
+### 重要なポイント
+- 4つのログレベル（DEBUG, INFO, WARNING, ERROR）
+- 関数ポインタ配列による効率的な実装
+- if-elseの森を避けたクリーンなコード
+- スケーラブルな設計パターン
 
-That's all.
-以上です。
+## 全体の学習成果
+このモジュールを通じて以下の重要な概念を習得しました：
+
+### メモリ管理
+- スタックとヒープの使い分け
+- 動的メモリ割り当てと解放
+- メモリリークの防止策
+
+### ポインタと参照
+- ポインタと参照の違い
+- 適切な使用場面の判断
+- メンバ変数としての活用
+
+### ファイル操作
+- ファイルストリームの使用
+- エラーハンドリング
+- 文字列処理
+
+### 設計パターン
+- 関数ポインタによるテーブル駆動設計
+- オブジェクト指向の基本原則
+- 効率的なコード構造
+
+## 注意点
+- **メモリ管理**: `new`で確保したメモリは必ず`delete`で解放
+- **配列**: `new[]`で確保したメモリは`delete[]`で解放
+- **参照**: 初期化時に必ず設定が必要
+- **ポインタ**: NULL チェックを忘れずに実装
+- **ファイル操作**: ファイルのオープン・クローズを確実に実行
